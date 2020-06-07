@@ -42,7 +42,7 @@ void TIM4_IRQHandler(void)
 }
 
 /** @defgroup Based on 72Mhz default clock
- *  @brief count 72 times cost 1us
+ *  @brief 1:18ms
  *  @param ms 0~65535
  **/
 void delay(uint16_t ms)
@@ -51,7 +51,7 @@ void delay(uint16_t ms)
     ms *= 2;
     for(; ms > 0; ms--)
     {
-        t = 36000;
+        t = 0x9C40;//36000;
         while((t--) > 0);
     }
 }

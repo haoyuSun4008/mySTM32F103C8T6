@@ -60,3 +60,49 @@ linking...
 Program Size: Code=6892 RO-data=268 RW-data=48 ZI-data=5728  
 FromELF: creating hex file...
 ".\Output\myPrj.axf" - 0 Errors, 16 Warning(s).
+Load "C:\\Users\\Administrator\\Desktop\\mySTM32F103C8T6\\Output\\myPrj.axf" 
+RDDI-DAP Error
+Load "C:\\Users\\Administrator\\Desktop\\mySTM32F103C8T6\\Output\\myPrj.axf" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+BSW\..\ASW\TestCase1.h(7): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\clock.h(10): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\timer.h(11): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\hwio.h(7): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\interrupt.h(7): warning:  #1-D: last line of file ends without a newline
+BSW\main.h(13): warning:  #1-D: last line of file ends without a newline
+BSW\main.c(31): warning:  #111-D: statement is unreachable
+BSW\main.c(65): warning:  #1-D: last line of file ends without a newline
+compiling timer.c...
+CSW\timer.h(11): warning:  #1-D: last line of file ends without a newline
+CSW\timer.c(57): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=6892 RO-data=268 RW-data=48 ZI-data=5728  
+FromELF: creating hex file...
+".\Output\myPrj.axf" - 0 Errors, 10 Warning(s).
+Load "C:\\Users\\Administrator\\Desktop\\mySTM32F103C8T6\\Output\\myPrj.axf" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+BSW\..\ASW\TestCase1.h(7): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\clock.h(10): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\timer.h(11): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\hwio.h(7): warning:  #1-D: last line of file ends without a newline
+BSW\..\CSW\interrupt.h(7): warning:  #1-D: last line of file ends without a newline
+BSW\main.h(13): warning:  #1-D: last line of file ends without a newline
+BSW\main.c(31): warning:  #111-D: statement is unreachable
+BSW\main.c(65): warning:  #1-D: last line of file ends without a newline
+compiling timer.c...
+CSW\timer.h(11): warning:  #1-D: last line of file ends without a newline
+CSW\timer.c(57): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=6892 RO-data=268 RW-data=48 ZI-data=5728  
+FromELF: creating hex file...
+".\Output\myPrj.axf" - 0 Errors, 10 Warning(s).

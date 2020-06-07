@@ -14,7 +14,7 @@ namespace CANBootloader
     {
         UInt64 DevType;
         UInt64 DevTypeUSB2CANB = ((UInt64)'U' << 56) | ((UInt64)'S' << 48) | ((UInt64)'B' << 40) | ((UInt64)'2' << 32) | ((UInt64)'C' << 24) | ((UInt64)'A' << 16) | ((UInt64)'N' << 8) | ((UInt64)'B' << 0);
-        //定义CAN波特率参数表
+        //define CAN BaudRate Param
         struct CAN_BAUD_RATE
         {
             public byte SJW;

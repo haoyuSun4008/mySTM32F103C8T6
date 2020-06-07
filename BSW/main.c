@@ -24,7 +24,7 @@ int main(void)
 			os_10ms_proc();
 		}
 		#endif
-		delay(50);
+		delay(50);	//500ms
 		led2_flashing_test();
 	}
 	
