@@ -31,7 +31,7 @@
 ".\output\stm32f10x_spi.o"
 ".\output\stm32f10x_usart.o"
 ".\output\stm32f10x_wwdg.o"
---nodebug --strict --scatter ".\Output\myPrj.sct"
+--strict --scatter ".\Output\myPrj.sct"
 
 --entry Reset_Handler --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

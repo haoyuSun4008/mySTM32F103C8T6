@@ -40,7 +40,7 @@ void os_init(void)
 	Interrupt_Config();
 	debug = 2;
 	//
-	//Timer4_Config();
+	//Timer4_Config();  //fixme
 	debug = 3;
 	//
 	Led_Config();
