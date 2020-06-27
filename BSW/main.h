@@ -9,5 +9,14 @@
 
     #include "stdint.h"
     //extern int __main(void);
-    
+
+    typedef enum os_state_type
+    {
+        os_uninited = 0,
+        os_inited,
+        os_running,
+        os_pause,
+        os_shutdown
+    }os_state_type;
+
 #endif

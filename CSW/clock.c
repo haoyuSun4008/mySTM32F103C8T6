@@ -6,7 +6,7 @@
   */
 void SystemClock_Config(void)
 {
-    #if 0
+    #if 1
     //restore clock config
     RCC_DeInit();
     //disable HSI
@@ -37,7 +37,7 @@ void SystemClock_Config(void)
     //enable PeriphClock
     #endif
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 
     // for more config please refer to the SOFTWARE STM32CubeMX
 }

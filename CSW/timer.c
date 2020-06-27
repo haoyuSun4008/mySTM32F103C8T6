@@ -1,9 +1,13 @@
 #include "timer.h"
 
-uint8_t os_tick = 0;
+uint16_t os_tick = 0;
+
+void my_NVIC_Init(void);
+void my_TIM_TimeBaseInit(void);
 
 void Timer4_Config(void)
 {
+    #if 0
     TIM_TimeBaseInitTypeDef *TimCfgStruct;
     NVIC_InitTypeDef *IRQcfgStruct;
     //set basic param
@@ -29,6 +33,28 @@ void Timer4_Config(void)
     NVIC_Init(IRQcfgStruct);
     //enable TIM4
     TIM_Cmd(TIM4, ENABLE);
+    #endif
+    #if 0
+    NVIC_InitTypeDef *IRQcfgStruct;
+    IRQcfgStruct->NVIC_IRQChannel = TIM4_IRQn;
+    IRQcfgStruct->NVIC_IRQChannelPreemptionPriority = 0;
+    IRQcfgStruct->NVIC_IRQChannelSubPriority = 3;
+    IRQcfgStruct->NVIC_IRQChannelCmd = ENABLE;
+    #endif
+    //========TIM_TimeBaseInit========//
+    my_TIM_TimeBaseInit();
+    //========TIM_ClearFlag========//
+    /* Clear the flags */
+    TIM4->SR = (uint16_t)~TIM_FLAG_Update;
+    //========TIM_ITConfig========//
+    /* Enable the Interrupt sources */
+    TIM4->DIER |= TIM_IT_Update;
+    //========NVIC_Init========//
+    my_NVIC_Init();
+    //config IRQ
+    //========TIM_Cmd========//
+    /* Enable the TIM Counter */
+    TIM4->CR1 |= TIM_CR1_CEN;
 }
 
 void TIM4_IRQHandler(void)
@@ -37,7 +63,7 @@ void TIM4_IRQHandler(void)
     {
         TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
         os_tick++;
-        os_tick %= 0xff;
+        os_tick %= 0xffff;
     }
 }
 
@@ -54,4 +80,49 @@ void delay(uint16_t ms)
         t = 0x9C40;//36000;
         while((t--) > 0);
     }
+}
+
+void my_NVIC_Init(void)
+{
+    uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
+    /* Compute the Corresponding IRQ Priority --------------------------------*/    
+    tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
+    tmppre = (0x4 - tmppriority);
+    tmpsub = tmpsub >> tmppriority;
+
+    tmppriority = (uint32_t)0 << tmppre;
+    tmppriority |=  3 & tmpsub;
+    tmppriority = tmppriority << 0x04;
+
+    NVIC->IP[TIM4_IRQn] = tmppriority;
+    
+    /* Enable the Selected IRQ Channels --------------------------------------*/
+    NVIC->ISER[TIM4_IRQn >> 0x05] =
+      (uint32_t)0x01 << (TIM4_IRQn & (uint8_t)0x1F);
+}
+
+void my_TIM_TimeBaseInit(void)
+{
+    uint16_t tmpcr1 = 0;
+    tmpcr1 = TIM4->CR1;  
+
+    /* Select the Counter Mode */
+    tmpcr1 &= (uint16_t)(~((uint16_t)(TIM_CR1_DIR | TIM_CR1_CMS)));
+    tmpcr1 |= (uint32_t)TIM_CounterMode_Up;
+    
+    /* Set the clock division */
+    tmpcr1 &= (uint16_t)(~((uint16_t)TIM_CR1_CKD));
+    tmpcr1 |= (uint32_t)TIM_CKD_DIV1;
+
+    TIM4->CR1 = tmpcr1;
+
+    /* Set the Autoreload value */
+    TIM4->ARR = 71 ;
+    
+    /* Set the Prescaler value */
+    TIM4->PSC = 999;
+
+    /* Generate an update event to reload the Prescaler and the Repetition counter
+       values immediately */
+    TIM4->EGR = TIM_PSCReloadMode_Immediate;
 }
