@@ -1,10 +1,8 @@
 #ifndef _TIMER_H_
 #define _TIMER_H_
-#include "..\MCAL\stm32f10x_tim.h"
-#include "..\MCAL\misc.h"
+#include ".\std_typ.h"
 
-extern uint16_t os_tick;  // bug fixed,
-void Timer4_Config(void);
+void timer4_init(void);
 void delay(uint16_t ms);
 extern void TIM4_IRQHandler(void);
 

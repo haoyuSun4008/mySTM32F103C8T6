@@ -1,11 +1,11 @@
+#include "..\MCAL\stm32f10x_tim.h"
+#include "..\MCAL\misc.h"
 #include "timer.h"
-
-uint16_t os_tick = 0;
 
 void my_NVIC_Init(void);
 void my_TIM_TimeBaseInit(void);
 
-void Timer4_Config(void)
+void timer4_init(void)
 {
     #if 0
     TIM_TimeBaseInitTypeDef *TimCfgStruct;
@@ -55,16 +55,6 @@ void Timer4_Config(void)
     //========TIM_Cmd========//
     /* Enable the TIM Counter */
     TIM4->CR1 |= TIM_CR1_CEN;
-}
-
-void TIM4_IRQHandler(void)
-{
-    if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
-    {
-        TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-        os_tick++;
-        os_tick %= 0xffff;
-    }
 }
 
 /** @defgroup Based on 72Mhz default clock
@@ -125,4 +115,17 @@ void my_TIM_TimeBaseInit(void)
     /* Generate an update event to reload the Prescaler and the Repetition counter
        values immediately */
     TIM4->EGR = TIM_PSCReloadMode_Immediate;
+}
+
+/**
+ * @brief 1ms IRQ
+ **/
+#include "..\BSW\os.h"
+void TIM4_IRQHandler(void)
+{
+    if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+    {
+        TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+        os_tick();
+    }
 }

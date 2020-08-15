@@ -1,10 +1,12 @@
+#include "..\MCAL\stm32f10x_rcc.h"
+#include "..\MCAL\misc.h"
 #include "clock.h"
 
 /**
   * @brief System Clock Configuration
   * @retval None
   */
-void SystemClock_Config(void)
+void SystemClock_init(void)
 {
     #if 1
     //restore clock config
@@ -36,8 +38,12 @@ void SystemClock_Config(void)
     //RCC_ClockSecuritySystemCmd(ENABLE);
     //enable PeriphClock
     #endif
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 
-    // for more config please refer to the SOFTWARE STM32CubeMX
+    /* GPIO Clock */
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
+    /* Module Clock */
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
 }

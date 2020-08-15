@@ -393,14 +393,14 @@
           <GroupName>ASW</GroupName>
           <Files>
             <File>
-              <FileName>TestCase1.c</FileName>
+              <FileName>LED.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\ASW\TestCase1.c</FilePath>
+              <FilePath>.\ASW\LED.c</FilePath>
             </File>
             <File>
-              <FileName>TestCase1.h</FileName>
+              <FileName>LED.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\ASW\TestCase1.h</FilePath>
+              <FilePath>.\ASW\LED.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -413,14 +413,19 @@
               <FilePath>.\BSW\main.c</FilePath>
             </File>
             <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\BSW\main.h</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\BSW\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>os.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BSW\os.c</FilePath>
+            </File>
+            <File>
+              <FileName>os.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\BSW\os.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -466,6 +471,46 @@
               <FileName>interrupt.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\CSW\interrupt.h</FilePath>
+            </File>
+            <File>
+              <FileName>can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CSW\can.c</FilePath>
+            </File>
+            <File>
+              <FileName>can.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CSW\can.h</FilePath>
+            </File>
+            <File>
+              <FileName>fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CSW\fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsmc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CSW\fsmc.h</FilePath>
+            </File>
+            <File>
+              <FileName>std_err.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CSW\std_err.h</FilePath>
+            </File>
+            <File>
+              <FileName>std_typ.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CSW\std_typ.h</FilePath>
+            </File>
+            <File>
+              <FileName>watchdog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CSW\watchdog.c</FilePath>
+            </File>
+            <File>
+              <FileName>watchdog.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CSW\watchdog.h</FilePath>
             </File>
           </Files>
         </Group>
