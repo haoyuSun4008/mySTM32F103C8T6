@@ -2,15 +2,15 @@
 #include "..\CSW\timer.h"
 #include "..\CSW\hwio.h"
 #include "..\CSW\interrupt.h"
-#include "..\CSW\can.h"
+//#include "..\CSW\can.h"
 #include "..\CSW\watchdog.h"
 #include "..\CSW\std_typ.h"
 #include "..\ASW\LED.h"
+#include "..\ASW\CAN.h"
 #include "os.h"
 
 
 #define OS_TICK (1U)
-#define REG_CODE_ENABLE (1U)
 
 void os_1ms_proc(void);
 void os_5ms_proc(void);
@@ -54,7 +54,7 @@ void os(void)
                 os_run();
                 break;
             }
-#if 1
+
             case OS_PRESHUTDOWN:
             {
                 // os_preshutdown();
@@ -68,7 +68,6 @@ void os(void)
                 os_state = OS_IDLE;
                 break;
             }
-#endif
         }
     }
 }
@@ -124,18 +123,18 @@ void os_init(void)
 	SystemClock_init();
 	debug = 1;
     
-    CAN_init();
-	debug = 2;
+	Interrupt_init();
+    debug = 2;
+    
+    CAN1_init();
+	debug = 3;
     
 	//hwio_init();
     LED_IO_init();  //20200815 check ok
-	debug = 3;
-    
-	timer4_init();  //fixme    //fixed
 	debug = 4;
     
-	Interrupt_init();
-    debug = 5;
+	timer4_init();  //fixme    //fixed
+	debug = 5;
 
     watchdog_init();  //20200815 check ok
     debug = 6;
@@ -161,7 +160,7 @@ void os_1ms_proc(void)
  **/
 void os_5ms_proc(void)
 {
-	//
+	//service the dog
     watchdog_reinit();
 }
 

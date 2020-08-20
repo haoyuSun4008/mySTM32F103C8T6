@@ -1,9 +1,9 @@
 #include "..\MCAL\stm32f10x_tim.h"
-#include "..\MCAL\misc.h"
+#include "..\CSW\interrupt.h"
 #include "timer.h"
 
-void my_NVIC_Init(void);
-void my_TIM_TimeBaseInit(void);
+void Timer4_NVIC_Init(void);
+void Timer4_TimeBaseInit(void);
 
 void timer4_init(void)
 {
@@ -35,14 +35,14 @@ void timer4_init(void)
     TIM_Cmd(TIM4, ENABLE);
     #endif
     #if 0
-    NVIC_InitTypeDef *IRQcfgStruct;
-    IRQcfgStruct->NVIC_IRQChannel = TIM4_IRQn;
-    IRQcfgStruct->NVIC_IRQChannelPreemptionPriority = 0;
-    IRQcfgStruct->NVIC_IRQChannelSubPriority = 3;
-    IRQcfgStruct->NVIC_IRQChannelCmd = ENABLE;
+    NVIC_InitTypeDef* Timer4Type;
+    Timer4Type->NVIC_IRQChannel = TIM4_IRQn;
+    Timer4Type->NVIC_IRQChannelPreemptionPriority = 0;
+    Timer4Type->NVIC_IRQChannelSubPriority = 3;
+    Timer4Type->NVIC_IRQChannelCmd = ENABLE;
     #endif
     //========TIM_TimeBaseInit========//
-    my_TIM_TimeBaseInit();
+    Timer4_TimeBaseInit();
     //========TIM_ClearFlag========//
     /* Clear the flags */
     TIM4->SR = (uint16_t)~TIM_FLAG_Update;
@@ -50,7 +50,7 @@ void timer4_init(void)
     /* Enable the Interrupt sources */
     TIM4->DIER |= TIM_IT_Update;
     //========NVIC_Init========//
-    my_NVIC_Init();
+    Timer4_NVIC_Init();
     //config IRQ
     //========TIM_Cmd========//
     /* Enable the TIM Counter */
@@ -72,9 +72,12 @@ void delay(uint16_t ms)
     }
 }
 
-void my_NVIC_Init(void)
+#if 1
+void Timer4_NVIC_Init(void)
 {
     uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
+    //CanType1->NVIC_IRQChannel = ENABLE;
+
     /* Compute the Corresponding IRQ Priority --------------------------------*/    
     tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
     tmppre = (0x4 - tmppriority);
@@ -85,13 +88,14 @@ void my_NVIC_Init(void)
     tmppriority = tmppriority << 0x04;
 
     NVIC->IP[TIM4_IRQn] = tmppriority;
-    
+
     /* Enable the Selected IRQ Channels --------------------------------------*/
     NVIC->ISER[TIM4_IRQn >> 0x05] =
       (uint32_t)0x01 << (TIM4_IRQn & (uint8_t)0x1F);
 }
+#endif
 
-void my_TIM_TimeBaseInit(void)
+void Timer4_TimeBaseInit(void)
 {
     uint16_t tmpcr1 = 0;
     tmpcr1 = TIM4->CR1;  

@@ -402,6 +402,16 @@
               <FileType>5</FileType>
               <FilePath>.\ASW\LED.h</FilePath>
             </File>
+            <File>
+              <FileName>CAN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ASW\CAN.c</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ASW\CAN.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -471,16 +481,6 @@
               <FileName>interrupt.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\CSW\interrupt.h</FilePath>
-            </File>
-            <File>
-              <FileName>can.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CSW\can.c</FilePath>
-            </File>
-            <File>
-              <FileName>can.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\CSW\can.h</FilePath>
             </File>
             <File>
               <FileName>fsmc.c</FileName>
