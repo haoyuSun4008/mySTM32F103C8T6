@@ -13,8 +13,12 @@ typedef enum os_state_t
 } os_state_t;
 
 //extern os_state_t os_state;
+//call in timer.c
 void os_tick(void);
+//call in main.c
 void os_preinit(void);
 void os(void);
+//call in ASW
+void os_goto_preshutdown(void);
 
 #endif

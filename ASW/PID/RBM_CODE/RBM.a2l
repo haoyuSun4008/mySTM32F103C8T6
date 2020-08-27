@@ -1,0 +1,2337 @@
+/******************************************************************************
+ *
+ *  ASAP2 file:     RBM.a2l
+ *
+ * Code generation for model "RBM".
+ *
+ * Model version              : 1.1842
+ * Simulink Coder version : 9.0 (R2018b) 24-May-2018
+ * C source code generated on : Thu Aug 27 10:51:32 2020
+ * 
+ * Target selection: ert.tlc
+ * Embedded hardware selection: STMicroelectronics->STM32 32-bit Cortex-M
+ * Code generation objectives: 
+ *    1. Execution efficiency
+ *    2. ROM efficiency
+ *    3. RAM efficiency
+ *    4. Traceability
+ *    5. Safety precaution
+ *    6. Debugging
+ *    7. MISRA C:2012 guidelines
+ *    8. Polyspace
+ * Validation result: Not run
+ *
+ * (add additional file header information here)
+ *
+ ******************************************************************************/
+
+ASAP2_VERSION  1 31   /* Version 1.31 */
+
+/begin PROJECT ProjectName "Project Comment Goes Here"
+  
+  /begin HEADER "Header Comments go here"
+    
+  /end HEADER
+  
+  
+  /begin MODULE ModuleName  "Module Comment Goes Here"
+    
+    /begin MOD_PAR "MOD PAR Comment Goes Here"
+      
+    /end MOD_PAR
+    
+    /begin MOD_COMMON  "Mod Common Comment Here" 
+      BYTE_ORDER     MSB_LAST
+    /end MOD_COMMON
+    
+    /begin RECORD_LAYOUT Scalar_BOOLEAN
+      FNC_VALUES  1 UBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_UBYTE
+      FNC_VALUES  1 UBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_BYTE
+      FNC_VALUES  1 SBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_UWORD
+      FNC_VALUES  1 UWORD COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_SWORD
+      FNC_VALUES 1 SWORD COLUMN_DIR DIRECT
+    /end RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_ULONG
+      FNC_VALUES  1 ULONG COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_LONG
+      FNC_VALUES  1 SLONG COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_FLOAT32_IEEE
+      FNC_VALUES  1 FLOAT32_IEEE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Scalar_FLOAT64_IEEE
+      FNC_VALUES  1 FLOAT64_IEEE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    
+    /begin RECORD_LAYOUT Lookup1D_BOOLEAN
+      FNC_VALUES  1 UBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_BOOLEAN
+      AXIS_PTS_X  1 UBYTE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_BYTE
+      FNC_VALUES  1 SBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_BYTE
+      AXIS_PTS_X  1 SBYTE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_UBYTE
+      FNC_VALUES  1 UBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_UBYTE
+      AXIS_PTS_X  1 UBYTE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_UWORD
+      FNC_VALUES  1 UWORD COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_UWORD
+      AXIS_PTS_X  1 UWORD INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_WORD
+      FNC_VALUES  1 SWORD COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_WORD
+      AXIS_PTS_X  1 SWORD INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_ULONG
+      FNC_VALUES  1 ULONG COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_ULONG
+      AXIS_PTS_X  1 ULONG INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_SLONG
+      FNC_VALUES  1 SLONG COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_LONG
+      AXIS_PTS_X  1 SLONG INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_FLOAT32_IEEE
+      FNC_VALUES  1 FLOAT32_IEEE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_FLOAT32_IEEE
+      AXIS_PTS_X  1 FLOAT32_IEEE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_FLOAT64_IEEE
+      FNC_VALUES  1 FLOAT64_IEEE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup1D_X_FLOAT64_IEEE
+      AXIS_PTS_X  1 FLOAT64_IEEE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_BOOLEAN
+      FNC_VALUES  1 UBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_BOOLEAN
+      AXIS_PTS_X  1 UBYTE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT    
+    
+    /begin RECORD_LAYOUT Lookup2D_UBYTE
+      FNC_VALUES  1 UBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_UBYTE
+      AXIS_PTS_X  1 UBYTE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_BYTE
+      FNC_VALUES  1 SBYTE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_BYTE
+      AXIS_PTS_X  1 SBYTE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_UWORD
+      FNC_VALUES  1 UWORD COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_UWORD
+      AXIS_PTS_X  1 UWORD INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_WORD
+      FNC_VALUES  1 SWORD COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_WORD
+      AXIS_PTS_X  1 SWORD INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_ULONG
+      FNC_VALUES  1 ULONG COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_ULONG
+      AXIS_PTS_X  1 ULONG INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_LONG
+      FNC_VALUES  1 SLONG COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_LONG
+      AXIS_PTS_X  1 SLONG INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_FLOAT32_IEEE
+      FNC_VALUES  1 FLOAT32_IEEE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_FLOAT32_IEEE
+      AXIS_PTS_X 1 FLOAT32_IEEE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_FLOAT64_IEEE
+      FNC_VALUES  1  FLOAT64_IEEE COLUMN_DIR DIRECT
+    /end   RECORD_LAYOUT
+    
+    /begin RECORD_LAYOUT Lookup2D_X_FLOAT64_IEEE
+      AXIS_PTS_X 1 FLOAT64_IEEE INDEX_INCR DIRECT
+    /end   RECORD_LAYOUT
+    
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapP2PDecouple_OutP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapP2PDecouple_OutP_s16En7Bar@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapP2PDecouple_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapP2PDecouple_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapP2PDecouple_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapS2PDecouple_OutP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapS2PDecouple_OutP_s16En7Bar@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_BrkPdlStk_s16s5_mm
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      9
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapS2PDecouple_InS_s16En5mm
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapS2PDecouple_InS_s16En5mm
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapS2PDecouple_InS_s16En5mm@ */
+      /* Input Quantity         */      V_InRBM_BrkPdlStk_s16s5_mm
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      9
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_EPSLimitTorqueMap_Tq_0P1Nm
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_EPSLimitTorqueMap_Tq_0P1Nm@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      NO_INPUT_QUANTITY
+        /* Conversion Method    */      RBM_CM_int16
+        /* Number of Axis Pts   */      4
+        /* Lower Limit          */      -32768
+        /* Upper Limit          */      32767
+        AXIS_PTS_REF                    K_RB_EPSLimitTorqueMap_Angle_Deg
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_EPSLimitTorqueMap_Angle_Deg
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_EPSLimitTorqueMap_Angle_Deg@ */
+      /* Input Quantity         */      NO_INPUT_QUANTITY
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Number of Axis Pts     */      4
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapMotorCharacter_OutTq_Rpm
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapMotorCharacter_OutTq_Rpm@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_MtrSpd_s16_Rpm
+        /* Conversion Method    */      RBM_CM_int16
+        /* Number of Axis Pts   */      9
+        /* Lower Limit          */      -32768
+        /* Upper Limit          */      32767
+        AXIS_PTS_REF                    K_RB_MapMotorCharacter_InSpd_Rpm
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapMotorCharacter_InSpd_Rpm
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapMotorCharacter_InSpd_Rpm@ */
+      /* Input Quantity         */      V_InRBM_MtrSpd_s16_Rpm
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Number of Axis Pts     */      9
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapVCUCoastTorq_0P1Nm
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapVCUCoastTorq_0P1Nm@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_CoastLvl_u8_Mode
+        /* Conversion Method    */      RBM_CM_uint8
+        /* Number of Axis Pts   */      5
+        /* Lower Limit          */      0
+        /* Upper Limit          */      255
+        AXIS_PTS_REF                    K_RB_MapVCUCoastLevelIn_u8
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapVCUCoastLevelIn_u8
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapVCUCoastLevelIn_u8@ */
+      /* Input Quantity         */      V_InRBM_CoastLvl_u8_Mode
+      /* Record Layout          */      Lookup1D_X_UBYTE
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_uint8
+      /* Number of Axis Pts     */      5
+      /* Lower Limit            */      0
+      /* Upper Limit            */      255
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapCoastDown_OutTq_0P1Nm
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapCoastDown_OutTq_0P1Nm@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_MtrSpd_s16_Rpm
+        /* Conversion Method    */      RBM_CM_int16
+        /* Number of Axis Pts   */      5
+        /* Lower Limit          */      -32768
+        /* Upper Limit          */      32767
+        AXIS_PTS_REF                    K_RB_MapCoastDown_InSpd_rpm
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapCoastDown_InSpd_rpm
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapCoastDown_InSpd_rpm@ */
+      /* Input Quantity         */      V_InRBM_MtrSpd_s16_Rpm
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Number of Axis Pts     */      5
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapQuitMotorSpd_OutSpd_Rpm
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitMotorSpd_OutSpd_Rpm@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapQuitMotorSpd_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapQuitMotorSpd_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitMotorSpd_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapCoastTorqIncrementCoffe
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      MAP
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapCoastTorqIncrementCoffe@ */
+      /* Record Layout          */      Lookup2D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+      /begin AXIS_DESCR                 
+        /* Description of Y-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_CoastLvl_u8_Mode
+        /* Conversion Method    */      RBM_CM_uint8
+        /* Number of Axis Pts   */      5
+        /* Lower Limit          */      0
+        /* Upper Limit          */      255
+        AXIS_PTS_REF                    K_RB_MapVCUCoastLevelIn_u8
+      /end AXIS_DESCR
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      11
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapTorqCompensationPoint_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapTorqCompensationPoint_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapTorqCompensationPoint_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup2D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      11
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapPrefillForcePressure_OutP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapPrefillForcePressure_OutP_s16En7Bar@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapPrefillForcePressure_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapPrefillForcePressure_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapPrefillForcePressure_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_PBrkCoeff_s16s10_null
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_PBrkCoeff_s16s10_null@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En10
+      /* Lower Limit            */      -32.0
+      /* Upper Limit            */      31.9990234375
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PAct_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      6
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    M_RB_BreakPntOfPAct_s16s7_Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      M_RB_BreakPntOfPAct_s16s7_Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@M_RB_BreakPntOfPAct_s16s7_Bar@ */
+      /* Input Quantity         */      V_InRBM_PAct_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      6
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapQuitdP2dPGain_OutP_s16En7
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitdP2dPGain_OutP_s16En7@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapQuitdP2dPGain_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapQuitdP2dPGain_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitdP2dPGain_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapQuitdP2dPOffset_OutP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitdP2dPOffset_OutP_s16En7Bar@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapQuitdP2dPOffset_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapQuitdP2dPOffset_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitdP2dPOffset_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapQuitTqDelay_Out_5ms
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitTqDelay_Out_5ms@ */
+      /* Record Layout          */      Lookup1D_UBYTE
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_uint8
+      /* Lower Limit            */      0
+      /* Upper Limit            */      255
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapQuitTqDelay_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapQuitTqDelay_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapQuitTqDelay_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup1D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MutiMapStepPressure_OutP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      MAP
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MutiMapStepPressure_OutP_s16En7Bar@ */
+      /* Record Layout          */      Lookup2D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of Y-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapStepPressure_InP_s16En7Bar
+      /end AXIS_DESCR
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      NO_INPUT_QUANTITY
+        /* Conversion Method    */      RBM_CM_int16
+        /* Number of Axis Pts   */      5
+        /* Lower Limit          */      -32768
+        /* Upper Limit          */      32767
+        AXIS_PTS_REF                    K_RB_MapStepPressure_InTq_s16_0P1Nm
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapStepPressure_InTq_s16_0P1Nm
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapStepPressure_InTq_s16_0P1Nm@ */
+      /* Input Quantity         */      NO_INPUT_QUANTITY
+      /* Record Layout          */      Lookup2D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_int16
+      /* Number of Axis Pts     */      5
+      /* Lower Limit            */      -32768
+      /* Upper Limit            */      32767
+    /end AXIS_PTS
+    
+    /begin AXIS_PTS
+      /* Name                   */      K_RB_MapStepPressure_InP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapStepPressure_InP_s16En7Bar@ */
+      /* Input Quantity         */      V_InRBM_PTar_s16s7_Bar
+      /* Record Layout          */      Lookup2D_X_WORD
+      /* Maximum Difference     */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Number of Axis Pts     */      13
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+    /end AXIS_PTS
+    
+    /begin CHARACTERISTIC      
+      /* Name                   */      K_RB_MapStepPressure_OutP_s16En7Bar
+      /* Long Identifier        */      ""
+      /* Characteristic Type    */      CURVE
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MapStepPressure_OutP_s16En7Bar@ */
+      /* Record Layout          */      Lookup1D_WORD
+      /* Maxdiff                */      0
+      /* Conversion Method      */      RBM_CM_sfix16_En7
+      /* Lower Limit            */      -256.0
+      /* Upper Limit            */      255.9921875
+      /begin AXIS_DESCR                 
+        /* Description of X-Axis Points */
+        /* Axis Type            */      COM_AXIS
+        /* Reference to Input   */      V_InRBM_PTar_s16s7_Bar
+        /* Conversion Method    */      RBM_CM_sfix16_En7
+        /* Number of Axis Pts   */      13
+        /* Lower Limit          */      -256.0
+        /* Upper Limit          */      255.9921875
+        AXIS_PTS_REF                    K_RB_MapStepPressure_InP_s16En7Bar
+      /end AXIS_DESCR
+    /end CHARACTERISTIC
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_CutInMotorSpdDelta_Rpm  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_CutInMotorSpdDelta_Rpm@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_CutInPdlStk_Pct  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_CutInPdlStk_Pct@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_CutOutMotorSpd_Rpm  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_CutOutMotorSpd_Rpm@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_MtrSpdQuitStop_s16_Rpm  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MtrSpdQuitStop_s16_Rpm@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_P2TqOffset_null  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_P2TqOffset_null@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_PrefillCutInMotorSpdDelta_Rpm  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_PrefillCutInMotorSpdDelta_Rpm@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_TorqueErrorThreshold_0P1Nm  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_TorqueErrorThreshold_0P1Nm@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_TorqueErrorTimeThreshold_5ms  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_TorqueErrorTimeThreshold_5ms@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_TqQuitStop_s16_0P1Nm  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_TqQuitStop_s16_0P1Nm@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_WheelSpdThreshold_kph  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_WheelSpdThreshold_kph@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_int16 
+      /* Lower Limit            */      -32768 
+      /* Upper Limit            */      32767
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RBM_AbsDlyP_s16s7_Bar  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RBM_AbsDlyP_s16s7_Bar@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_sfix16_En7 
+      /* Lower Limit            */      -256.0 
+      /* Upper Limit            */      255.9921875
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_ABSStepP_s16En7Bar  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_ABSStepP_s16En7Bar@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_sfix16_En7 
+      /* Lower Limit            */      -256.0 
+      /* Upper Limit            */      255.9921875
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_FastQuitSpdOfSts1_s16s7_Bar  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_FastQuitSpdOfSts1_s16s7_Bar@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_sfix16_En7 
+      /* Lower Limit            */      -256.0 
+      /* Upper Limit            */      255.9921875
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_OutPMinPressure_s16En7Bar  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_OutPMinPressure_s16En7Bar@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_sfix16_En7 
+      /* Lower Limit            */      -256.0 
+      /* Upper Limit            */      255.9921875
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_P2TqGain_null  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_P2TqGain_null@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_sfix16_En7 
+      /* Lower Limit            */      -256.0 
+      /* Upper Limit            */      255.9921875
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_SlowQuitSpdOfSts1_s16s7_Bar  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_SlowQuitSpdOfSts1_s16s7_Bar@ */ 
+      /* Record Layout          */      Scalar_SWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_sfix16_En7 
+      /* Lower Limit            */      -256.0 
+      /* Upper Limit            */      255.9921875
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_Q2DDelay_u8_5ms  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_Q2DDelay_u8_5ms@ */ 
+      /* Record Layout          */      Scalar_UWORD 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint16 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      65535
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RBM_TotFctEna_u8_Flg  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RBM_TotFctEna_u8_Flg@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_ABSDelay_Disable  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_ABSDelay_Disable@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_AbsActvCoastCnclEna_u8_Flg  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_AbsActvCoastCnclEna_u8_Flg@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_DiagAssistant_Ena  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_DiagAssistant_Ena@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_ForceDisable_Ena  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_ForceDisable_Ena@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_ForceQuit_Ena  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_ForceQuit_Ena@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_FullChargeQuit_Disable  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_FullChargeQuit_Disable@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_GearOverride_Ena  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_GearOverride_Ena@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_GearOverride_Flg  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_GearOverride_Flg@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_MultiCoastTenseEna_u8_Flg  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_MultiCoastTenseEna_u8_Flg@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    /begin CHARACTERISTIC
+      /* Name                   */      K_RB_Prefill_Ena  
+      /* Long Identifier        */      ""
+      /* Type                   */      VALUE 
+      /* ECU Address            */      0x0000 /* @ECU_Address@K_RB_Prefill_Ena@ */ 
+      /* Record Layout          */      Scalar_UBYTE 
+      /* Maximum Difference     */      0 
+      /* Conversion Method      */      RBM_CM_uint8 
+      /* Lower Limit            */      0 
+      /* Upper Limit            */      255
+    /end CHARACTERISTIC
+    
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_EhbErrMod_u8_Mode
+      /* Long identifier        */      "0: no err
+      1: degraded
+      2: broken"
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      6.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_EhbErrMod_u8_Mode@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_PTar_s16s7_Bar
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      150.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_PTar_s16s7_Bar@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_PAct_s16s7_Bar
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      150.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_PAct_s16s7_Bar@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_BrkPdlStk_s16s5_mm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En5
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      50.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_BrkPdlStk_s16s5_mm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_RbmEnaFromVcu_u8_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_RbmEnaFromVcu_u8_Flg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_GasPdlStk_s16_Perc
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_GasPdlStk_s16_Perc@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_GasPdlStk_u8_Vld
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      2.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_GasPdlStk_u8_Vld@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_MtrTqLim_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_MtrTqLim_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_MtrTqLim_u8_Vld
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_MtrTqLim_u8_Vld@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_PtMinorFlt_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_PtMinorFlt_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_PtSevereFlt_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_PtSevereFlt_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_GearPosnAct_u8_Mode
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_GearPosnAct_u8_Mode@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_AbsActv_u8_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_AbsActv_u8_Flg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_BmsI_s16_0P1A
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_BmsI_s16_0P1A@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_BmsU_s16_0P1V
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      5000.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_BmsU_s16_0P1V@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_EpsSteerAg_s16_Deg
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_EpsSteerAg_s16_Deg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_EpsSteerAg_u8_Vld
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_EpsSteerAg_u8_Vld@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_ChassisFlt_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_ChassisFlt_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_MtrSpd_s16_Rpm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_MtrSpd_s16_Rpm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_MtrSpd_u8_Vld
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_MtrSpd_u8_Vld@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_MtrTqAct_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_MtrTqAct_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_MtrTqAct_u8_Vld
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_MtrTqAct_u8_Vld@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_LostChassisCan_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_LostChassisCan_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_LostPtCan_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_LostPtCan_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_VehSpd_s16_0P1Kph
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_VehSpd_s16_0P1Kph@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_VehSpd_u8_Vld
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_VehSpd_u8_Vld@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_FLWhlSpd_s16_0P1Kph
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_FLWhlSpd_s16_0P1Kph@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_FRWhlSpd_s16_0P1Kph
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_FRWhlSpd_s16_0P1Kph@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_RLWhlSpd_s16_0P1Kph
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_RLWhlSpd_s16_0P1Kph@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_RRWhlSpd_s16_0P1Kph
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      100.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_RRWhlSpd_s16_0P1Kph@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_InRBM_CoastLvl_u8_Mode
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0.0
+      /* Upper limit            */      1.0
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_InRBM_CoastLvl_u8_Mode@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      dAimP
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -256.0
+      /* Upper limit            */      255.9921875
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@dAimP@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_PTarFormer_s16s7_Bar
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -256.0
+      /* Upper limit            */      255.9921875
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_PTarFormer_s16s7_Bar@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_OutRBM_PTar_s16s7_Bar
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -256.0
+      /* Upper limit            */      255.9921875
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_OutRBM_PTar_s16s7_Bar@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RB_dpQuitMod_s16s7_Bar
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -256.0
+      /* Upper limit            */      255.9921875
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RB_dpQuitMod_s16s7_Bar@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      dPQuit
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_sfix16_En7
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -256.0
+      /* Upper limit            */      255.9921875
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@dPQuit@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_MtrTqCoast_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_MtrTqCoast_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_MtrTqTarFormer_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_MtrTqTarFormer_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_MtrTqAllwd_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_MtrTqAllwd_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_DTqQuitMode_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_DTqQuitMode_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_DiagInfo1_u16_Mode
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_DiagInfo1_u16_Mode@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_DiagInfo2_u16_Mode
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_DiagInfo2_u16_Mode@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_OutRBM_MtrTqTar_s16_0P1Nm
+      /* Long identifier        */      ""
+      /* Data type              */      SWORD
+      /* Conversion method      */      RBM_CM_int16
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      -32768
+      /* Upper limit            */      32767
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_OutRBM_MtrTqTar_s16_0P1Nm@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_FormerTorqueErrorOver_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_FormerTorqueErrorOver_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RB_RBModeMask_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RB_RBModeMask_Flg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_OutRBM_RbmActv_u8_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_OutRBM_RbmActv_u8_Flg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_OutRBM_PreFillEna_u8_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_OutRBM_PreFillEna_u8_Flg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_OutRBM_TqErrOver_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_OutRBM_TqErrOver_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_OutRBM_MtrTqFolwReq_u8_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_OutRBM_MtrTqFolwReq_u8_Flg@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      RB_Ver
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      /* Array Size             */
+      ARRAY_SIZE                        9
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@RB_Ver@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_DiModSts_u8_Mode
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_DiModSts_u8_Mode@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RBM_WhlSpdSlip_u8_Err
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RBM_WhlSpdSlip_u8_Err@ */
+    /end MEASUREMENT
+    
+    
+    /begin MEASUREMENT
+      /* Name                   */      V_RB_RBState_Flg
+      /* Long identifier        */      ""
+      /* Data type              */      UBYTE
+      /* Conversion method      */      RBM_CM_uint8
+      /* Resolution (Not used)  */      0
+      /* Accuracy (Not used)    */      0
+      /* Lower limit            */      0
+      /* Upper limit            */      255
+      ECU_ADDRESS                       0x0000 /* @ECU_Address@V_RB_RBState_Flg@ */
+    /end MEASUREMENT
+    
+    /begin COMPU_METHOD
+      /* Name of CompuMethod    */      RBM_CM_sfix16_En7
+      /* Long identifier        */      "Q = V*128.000000"
+      /* Conversion Type        */      RAT_FUNC
+      /* Format                 */      "%10.7"
+      /* Units                  */      ""
+      /* Coefficients           */      COEFFS 0 128.000000 0.000000 0 0 1.000000
+    /end COMPU_METHOD
+    
+    /begin COMPU_METHOD
+      /* Name of CompuMethod    */      RBM_CM_int16
+      /* Long identifier        */      "Q = V"
+      /* Conversion Type        */      RAT_FUNC
+      /* Format                 */      "%5.0"
+      /* Units                  */      ""
+      /* Coefficients           */      COEFFS 0 1 0 0 0 1
+    /end COMPU_METHOD
+    
+    /begin COMPU_METHOD
+      /* Name of CompuMethod    */      RBM_CM_uint8
+      /* Long identifier        */      "Q = V"
+      /* Conversion Type        */      RAT_FUNC
+      /* Format                 */      "%3.0"
+      /* Units                  */      ""
+      /* Coefficients           */      COEFFS 0 1 0 0 0 1
+    /end COMPU_METHOD
+    
+    /begin COMPU_METHOD
+      /* Name of CompuMethod    */      RBM_CM_sfix16_En10
+      /* Long identifier        */      "Q = V*1024.000000"
+      /* Conversion Type        */      RAT_FUNC
+      /* Format                 */      "%12.10"
+      /* Units                  */      ""
+      /* Coefficients           */      COEFFS 0 1024.000000 0.000000 0 0 1.000000
+    /end COMPU_METHOD
+    
+    /begin COMPU_METHOD
+      /* Name of CompuMethod    */      RBM_CM_uint16
+      /* Long identifier        */      "Q = V"
+      /* Conversion Type        */      RAT_FUNC
+      /* Format                 */      "%5.0"
+      /* Units                  */      ""
+      /* Coefficients           */      COEFFS 0 1 0 0 0 1
+    /end COMPU_METHOD
+    
+    /begin COMPU_METHOD
+      /* Name of CompuMethod    */      RBM_CM_sfix16_En5
+      /* Long identifier        */      "Q = V*32.000000"
+      /* Conversion Type        */      RAT_FUNC
+      /* Format                 */      "%9.5"
+      /* Units                  */      ""
+      /* Coefficients           */      COEFFS 0 32.000000 0.000000 0 0 1.000000
+    /end COMPU_METHOD
+    
+    /begin GROUP 
+      /* Name                   */       RBM
+      /* Long identifier        */       "RBM"
+      /* Root                    */       ROOT
+      /begin SUB_GROUP
+        Root_Subsystem
+      /end SUB_GROUP
+      /begin REF_MEASUREMENT
+        V_InRBM_AbsActv_u8_Flg
+        V_InRBM_BmsI_s16_0P1A
+        V_InRBM_BmsU_s16_0P1V
+        V_InRBM_BrkPdlStk_s16s5_mm
+        V_InRBM_ChassisFlt_u8_Err
+        V_InRBM_CoastLvl_u8_Mode
+        V_InRBM_EhbErrMod_u8_Mode
+        V_InRBM_EpsSteerAg_s16_Deg
+        V_InRBM_EpsSteerAg_u8_Vld
+        V_InRBM_FLWhlSpd_s16_0P1Kph
+        V_InRBM_FRWhlSpd_s16_0P1Kph
+        V_InRBM_GasPdlStk_s16_Perc
+        V_InRBM_GasPdlStk_u8_Vld
+        V_InRBM_GearPosnAct_u8_Mode
+        V_InRBM_LostChassisCan_u8_Err
+        V_InRBM_LostPtCan_u8_Err
+        V_InRBM_MtrSpd_s16_Rpm
+        V_InRBM_MtrSpd_u8_Vld
+        V_InRBM_MtrTqAct_s16_0P1Nm
+        V_InRBM_MtrTqAct_u8_Vld
+        V_InRBM_MtrTqLim_s16_0P1Nm
+        V_InRBM_MtrTqLim_u8_Vld
+        V_InRBM_PAct_s16s7_Bar
+        V_InRBM_PTar_s16s7_Bar
+        V_InRBM_PtMinorFlt_u8_Err
+        V_InRBM_PtSevereFlt_u8_Err
+        V_InRBM_RLWhlSpd_s16_0P1Kph
+        V_InRBM_RRWhlSpd_s16_0P1Kph
+        V_InRBM_RbmEnaFromVcu_u8_Flg
+        V_InRBM_VehSpd_s16_0P1Kph
+        V_InRBM_VehSpd_u8_Vld
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       Root_Subsystem
+      /* Long identifier        */       "RBM/Subsystem"
+      /begin SUB_GROUP
+        S1_AllowMotorTorqueCalculator
+        S1_CoastBrakeCalculator
+        S1_Prefill_Ena
+        S1_RB_Disable_Mode
+        S1_RB_Enable_Mode
+        S1_RB_Quit_Mode
+        S1_RB_State_Judge
+        S1_Subsystem
+        S1_Subsystem2
+        S1_dAimP
+      /end SUB_GROUP
+      /begin REF_CHARACTERISTIC
+        K_RBM_TotFctEna_u8_Flg
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        RB_Ver
+        V_OutRBM_MtrTqFolwReq_u8_Flg
+        V_OutRBM_MtrTqTar_s16_0P1Nm
+        V_OutRBM_PTar_s16s7_Bar
+        V_OutRBM_RbmActv_u8_Flg
+        V_OutRBM_TqErrOver_u8_Err
+        V_RBM_FormerTorqueErrorOver_u8_Err
+        V_RBM_MtrTqTarFormer_s16_0P1Nm
+        V_RBM_PTarFormer_s16s7_Bar
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_AllowMotorTorqueCalculator
+      /* Long identifier        */       "RBM/Subsystem/AllowMotorTorqueCalculator"
+      /begin SUB_GROUP
+        S3_p2tq
+        S3_p2tq1
+      /end SUB_GROUP
+      /begin REF_CHARACTERISTIC
+        K_RB_EPSLimitTorqueMap_Tq_0P1Nm
+        K_RB_MapMotorCharacter_OutTq_Rpm
+        K_RB_MapP2PDecouple_OutP_s16En7Bar
+        K_RB_MapS2PDecouple_OutP_s16En7Bar
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        V_RBM_MtrTqAllwd_s16_0P1Nm
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_CoastBrakeCalculator
+      /* Long identifier        */       "RBM/Subsystem/CoastBrakeCalculator"
+      /begin REF_CHARACTERISTIC
+        K_RB_MapCoastDown_OutTq_0P1Nm
+        K_RB_MapVCUCoastTorq_0P1Nm
+        K_RB_MultiCoastTenseEna_u8_Flg
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        V_RBM_MtrTqCoast_s16_0P1Nm
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_Prefill_Ena
+      /* Long identifier        */       "RBM/Subsystem/Prefill_Ena"
+      /begin REF_CHARACTERISTIC
+        K_RB_Prefill_Ena
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        V_OutRBM_PreFillEna_u8_Flg
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_RB_Disable_Mode
+      /* Long identifier        */       "RBM/Subsystem/RB_Disable_Mode"
+      /begin SUB_GROUP
+        S8_Subsystem
+      /end SUB_GROUP
+      /begin REF_MEASUREMENT
+        V_RBM_DiModSts_u8_Mode
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_RB_Enable_Mode
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode"
+      /begin SUB_GROUP
+        S10_CoastCncl
+        S10_RBEna_Signals
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_RB_Quit_Mode
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode"
+      /begin SUB_GROUP
+        S11_Subsystem1
+        S11_Subsystem2
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_RB_State_Judge
+      /* Long identifier        */       "RBM/Subsystem/RB_State_Judge"
+      /begin SUB_GROUP
+        S12_Diag
+        S12_override
+      /end SUB_GROUP
+      /begin REF_CHARACTERISTIC
+        K_RB_CutInMotorSpdDelta_Rpm
+        K_RB_CutInPdlStk_Pct
+        K_RB_CutOutMotorSpd_Rpm
+        K_RB_DiagAssistant_Ena
+        K_RB_ForceDisable_Ena
+        K_RB_ForceQuit_Ena
+        K_RB_MapQuitMotorSpd_OutSpd_Rpm
+        K_RB_Q2DDelay_u8_5ms
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        V_RB_RBModeMask_Flg
+        V_RB_RBState_Flg
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_Subsystem
+      /* Long identifier        */       "RBM/Subsystem/Subsystem"
+      /begin REF_CHARACTERISTIC
+        K_RB_WheelSpdThreshold_kph
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        V_RBM_WhlSpdSlip_u8_Err
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_Subsystem2
+      /* Long identifier        */       "RBM/Subsystem/Subsystem2"
+      /begin REF_CHARACTERISTIC
+        K_RB_OutPMinPressure_s16En7Bar
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S1_dAimP
+      /* Long identifier        */       "RBM/Subsystem/dAimP"
+      /begin REF_MEASUREMENT
+        dAimP
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S3_p2tq
+      /* Long identifier        */       "RBM/Subsystem/AllowMotorTorqueCalculator/p2tq"
+      /begin REF_CHARACTERISTIC
+        K_RB_P2TqGain_null
+        K_RB_P2TqOffset_null
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S3_p2tq1
+      /* Long identifier        */       "RBM/Subsystem/AllowMotorTorqueCalculator/p2tq1"
+      /begin REF_CHARACTERISTIC
+        K_RB_P2TqGain_null
+        K_RB_P2TqOffset_null
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S8_Subsystem
+      /* Long identifier        */       "RBM/Subsystem/RB_Disable_Mode/Subsystem"
+      /begin REF_CHARACTERISTIC
+        K_RB_FastQuitSpdOfSts1_s16s7_Bar
+        K_RB_P2TqGain_null
+        K_RB_SlowQuitSpdOfSts1_s16s7_Bar
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        dPQuit
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S10_CoastCncl
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/CoastCncl"
+      /begin REF_CHARACTERISTIC
+        K_RB_AbsActvCoastCnclEna_u8_Flg
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S10_RBEna_Signals
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals"
+      /begin SUB_GROUP
+        S25_AntiLightBrakeAcceleration
+        S25_Prefill_Function_Judger
+        S25_Torque_Err_Debounce
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S11_Subsystem1
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem1"
+      /begin SUB_GROUP
+        S46_EHBAimP
+        S46_PrefillPressure
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S11_Subsystem2
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2"
+      /begin SUB_GROUP
+        S47_AimTorque
+        S47_CoastLmtCtrl
+        S47_dpcaculator
+        S47_dpcaculator_ABSActive
+      /end SUB_GROUP
+      /begin REF_MEASUREMENT
+        V_RB_dpQuitMod_s16s7_Bar
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S12_Diag
+      /* Long identifier        */       "RBM/Subsystem/RB_State_Judge/Diag"
+      /begin REF_MEASUREMENT
+        V_RBM_DiagInfo1_u16_Mode
+        V_RBM_DiagInfo2_u16_Mode
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S12_override
+      /* Long identifier        */       "RBM/Subsystem/RB_State_Judge/override"
+      /begin REF_CHARACTERISTIC
+        K_RB_GearOverride_Ena
+        K_RB_GearOverride_Flg
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S25_AntiLightBrakeAcceleration
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals/AntiLightBrakeAcceleration"
+      /begin SUB_GROUP
+        S32_CoastBrakeCalculator
+      /end SUB_GROUP
+      /begin REF_CHARACTERISTIC
+        K_RB_MapCoastTorqIncrementCoffe
+        K_RB_MultiCoastTenseEna_u8_Flg
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S25_Prefill_Function_Judger
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals/Prefill Function Judger"
+      /begin SUB_GROUP
+        S33_PrefillPressure
+        S33_tq2p
+      /end SUB_GROUP
+      /begin REF_CHARACTERISTIC
+        K_RB_MapQuitMotorSpd_OutSpd_Rpm
+        K_RB_PrefillCutInMotorSpdDelta_Rpm
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S25_Torque_Err_Debounce
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals/Torque Err Debounce"
+      /begin REF_CHARACTERISTIC
+        K_RB_TorqueErrorThreshold_0P1Nm
+        K_RB_TorqueErrorTimeThreshold_5ms
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S46_EHBAimP
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem1/EHBAimP"
+      /begin SUB_GROUP
+        S48_quit_dp2dp
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S46_PrefillPressure
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem1/PrefillPressure"
+      /begin REF_CHARACTERISTIC
+        K_RB_MapPrefillForcePressure_OutP_s16En7Bar
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S47_AimTorque
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/AimTorque"
+      /begin SUB_GROUP
+        S53_TqDelay
+        S53_p2tq
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S47_CoastLmtCtrl
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/CoastLmtCtrl"
+      /begin REF_CHARACTERISTIC
+        K_RB_AbsActvCoastCnclEna_u8_Flg
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S47_dpcaculator
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/dpcaculator"
+      /begin SUB_GROUP
+        S57_dp_norm_caculator
+        S57_pressure_rising_stopping
+      /end SUB_GROUP
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S47_dpcaculator_ABSActive
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/dpcaculator_ABSActive"
+      /begin REF_CHARACTERISTIC
+        K_RBM_AbsDlyP_s16s7_Bar
+        K_RB_ABSDelay_Disable
+        K_RB_ABSStepP_s16En7Bar
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S32_CoastBrakeCalculator
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals/AntiLightBrakeAcceleration/CoastBrakeCalculator"
+      /begin REF_CHARACTERISTIC
+        K_RB_MapCoastDown_OutTq_0P1Nm
+        K_RB_MapVCUCoastTorq_0P1Nm
+        K_RB_MultiCoastTenseEna_u8_Flg
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S33_PrefillPressure
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals/Prefill Function Judger/PrefillPressure"
+      /begin REF_CHARACTERISTIC
+        K_RB_MapPrefillForcePressure_OutP_s16En7Bar
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S33_tq2p
+      /* Long identifier        */       "RBM/Subsystem/RB_Enable_Mode/RBEna Signals/Prefill Function Judger/tq2p"
+      /begin REF_CHARACTERISTIC
+        K_RB_P2TqGain_null
+        K_RB_P2TqOffset_null
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S48_quit_dp2dp
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem1/EHBAimP/quit dp2dp"
+      /begin REF_CHARACTERISTIC
+        K_RB_MapQuitdP2dPGain_OutP_s16En7
+        K_RB_MapQuitdP2dPOffset_OutP_s16En7Bar
+        K_RB_PBrkCoeff_s16s10_null
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S53_TqDelay
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/AimTorque/TqDelay"
+      /begin REF_CHARACTERISTIC
+        K_RB_MapQuitTqDelay_Out_5ms
+      /end REF_CHARACTERISTIC
+      /begin REF_MEASUREMENT
+        V_RBM_DTqQuitMode_s16_0P1Nm
+      /end REF_MEASUREMENT
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S53_p2tq
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/AimTorque/p2tq"
+      /begin REF_CHARACTERISTIC
+        K_RB_P2TqGain_null
+        K_RB_P2TqOffset_null
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S57_dp_norm_caculator
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/dpcaculator/dp_norm_caculator"
+      /begin REF_CHARACTERISTIC
+        K_RB_FullChargeQuit_Disable
+        K_RB_MapStepPressure_OutP_s16En7Bar
+        K_RB_MutiMapStepPressure_OutP_s16En7Bar
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    /begin GROUP 
+      /* Name                   */       S57_pressure_rising_stopping
+      /* Long identifier        */       "RBM/Subsystem/RB_Quit_Mode/Subsystem2/dpcaculator/pressure_rising_stopping"
+      /begin REF_CHARACTERISTIC
+        K_RB_MtrSpdQuitStop_s16_Rpm
+        K_RB_TqQuitStop_s16_0P1Nm
+      /end REF_CHARACTERISTIC
+    /end GROUP
+    
+    
+  /end MODULE
+  
+  
+/end PROJECT
+/* (add any file trailer comments here) */
+/* EOF RBM.a2l */

@@ -1,4 +1,4 @@
-#include "..\BSW\os.h"
+#include "os.h"
 
 //int __main(void)
 int main(void)

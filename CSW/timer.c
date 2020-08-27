@@ -1,5 +1,5 @@
 #include "..\MCAL\stm32f10x_tim.h"
-#include "..\CSW\interrupt.h"
+#include "interrupt.h"
 #include "timer.h"
 
 void Timer4_NVIC_Init(void);

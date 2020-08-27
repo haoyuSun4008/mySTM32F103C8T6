@@ -1,6 +1,5 @@
 #include "..\MCAL\stm32f10x_gpio.h"
-#include "..\MCAL\stm32f10x_can.h"
-#include "..\CSW\interrupt.h"
+#include "interrupt.h"
 #include "can.h"
 
 #define BaudRate_250Kbps        (0U)
@@ -87,6 +86,7 @@ void CAN1_init(void)
     CAN1_NVIC_init();
 #endif
 }
+
 #if 1
 /**
  * @brief rewrite the NVIC_init()
@@ -112,3 +112,73 @@ void CAN1_NVIC_init(void)
       (uint32_t)0x01 << (USB_LP_CAN1_RX0_IRQn & (uint8_t)0x1F);
 }
 #endif
+
+/**
+ * @brief Send Msg 
+ **/
+std_err_t can_msg_send(CanTxMsg* tempTxMsg)
+{
+    //
+    uint8_t mbox = 0, i = 0;
+    mbox = CAN_Transmit(CAN1, tempTxMsg);
+    while((CAN_TransmitStatus(CAN1, mbox) != CAN_TxStatus_Ok) && (i < 0xfff))
+    {
+        i++;
+    }
+    if (i >= 0xfff) 
+    {
+        return ErrNotOk;
+    }
+    else
+    {
+        return ErrOk;
+    }
+}
+
+/**
+ * @brief Check and Return Msg 
+ **/
+std_err_t can_msg_receive(CanRxMsg* tempRxMsg)
+{
+    //
+    if (CAN_MessagePending(CAN1, CAN_FIFO0) == 0) return ErrNotOk;
+    CAN_Receive(CAN1, CAN_FIFO0, tempRxMsg);
+    return ErrOk;
+}
+
+/**
+ * @brief CAN MSG RECEIVE IRQ
+ **/
+#if (CAN_RX0_INT_ENABLE)
+void USB_LP_CAN1_RX0_IRQHandler(void)
+{
+    //
+    CanRxMsg* RxMsg;
+    int8_t i = 0;
+    CAN_Receive(CAN1, 0, RxMsg);
+}
+#endif
+
+/**
+ * @brief CAN MSG SEND IRQ
+ **/
+void USB_HP_CAN1_TX_IRQHandler(void)
+{
+    //
+}
+
+/**
+ * @brief CAN MSG SEND IRQ
+ **/
+void CAN1_RX1_IRQHandler(void)
+{
+    //
+}
+
+/**
+ * @brief CAN MSG SEND IRQ
+ **/
+void CAN1_SCE_IRQHandler(void)
+{
+    //
+}

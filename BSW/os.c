@@ -1,13 +1,17 @@
+/*===include Config Func===*/
 #include "..\CSW\clock.h"
 #include "..\CSW\timer.h"
 #include "..\CSW\hwio.h"
 #include "..\CSW\interrupt.h"
-//#include "..\CSW\can.h"
+#include "..\CSW\can.h"
 #include "..\CSW\watchdog.h"
 #include "..\CSW\std_typ.h"
-#include "..\ASW\LED.h"
-#include "..\ASW\CAN.h"
+#include "..\CSW\TimingTest.h"
 #include "os.h"
+/*====include Test Func====*/
+#include "..\ASW\LED.h"
+#include "..\ASW\CanSend.h"
+#include "..\ASW\PID\pid_model.h"
 
 
 #define OS_TICK (1U)
@@ -17,8 +21,6 @@ void os_5ms_proc(void);
 void os_10ms_proc(void);
 void os_init(void);
 void os_run(void);
-void os_preshutdown(void);
-void os_shutdown(void);
 
 os_state_t os_state = OS_UNINIT;
 
@@ -112,6 +114,7 @@ void os_tick(void)
 void os_preinit(void)
 {
     //
+    pid_model_initilize();
 }
 
 /**
@@ -127,6 +130,7 @@ void os_init(void)
     debug = 2;
     
     CAN1_init();
+    CanTestMsg_init();
 	debug = 3;
     
 	//hwio_init();
@@ -169,22 +173,23 @@ void os_5ms_proc(void)
  **/
 void os_10ms_proc(void)
 {
-	//
+    //
+    TimingTest_SetHigh(0);
+	//Prg Alive Indicator
 	LED_flashing();
+    //
+    CanTx_Test();
+    //
+    pid_model_proc();
+    //Timing Test Ok 50us
+    TimingTest_SetLow(0);
 }
 
 /**
- * @brief os preshutdown assignment
+ * @brief called by ASW
  **/
-void os_preshutdown(void)
+void os_goto_preshutdown(void)
 {
     //
-}
-
-/**
- * @brief os preshutdown assignment
- **/
-void os_shutdown(void)
-{
-    //
+    os_state = OS_PRESHUTDOWN;
 }
