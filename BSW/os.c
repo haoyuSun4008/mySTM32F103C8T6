@@ -133,8 +133,8 @@ void os_init(void)
     CanTestMsg_init();
 	debug = 3;
     
-	//hwio_init();
-    LED_IO_init();  //20200815 check ok
+	hwio_init();
+    //LED_IO_init();  //20200815 check ok
 	debug = 4;
     
 	timer4_init();  //fixme    //fixed
@@ -150,6 +150,7 @@ void os_init(void)
 void os_1ms_proc(void)
 {
 	//
+    //watchdog_reinit();
     //for debug
     tick_cnt += OS_TICK;
     if (tick_cnt >= 1000)
@@ -193,3 +194,4 @@ void os_goto_preshutdown(void)
     //
     os_state = OS_PRESHUTDOWN;
 }
+/*EOF*/

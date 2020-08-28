@@ -13,105 +13,56 @@ void CAN1_NVIC_init(void);
  **/
 void CAN1_init(void)
 {
-    //
-    //NVIC_InitTypeDef* CanType1;
-    uint32_t i = 0;
+    CAN_InitTypeDef        CAN_InitStructure;
+    CAN_FilterInitTypeDef  CAN_FilterInitStructure;
+    NVIC_InitTypeDef       NVIC_InitStructure;
 
-    //CanType1->NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
-    //CanType1->NVIC_IRQChannelPreemptionPriority = 1;
-    //CanType1->NVIC_IRQChannelSubPriority = 0;
+    /* Enable CAN1 RX0 interrupt IRQ channel */
+    NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
 
-    /* RCC Setting in clock.c/h */
+    /* Set to Default */
+    CAN_DeInit(CAN1);
+    CAN_StructInit(&CAN_InitStructure);
 
-    //CAN io init
-    //GPIOA->Pin11  CANRx
-    //GPIOA->Pin12  CANTx
-    GPIOA->CRL = 0x44444444||0x44444444;
-    GPIOA->CRH = 0x88848444||0x888B8444;
+    /* CAN Regs Init */
+    CAN_InitStructure.CAN_TTCM = DISABLE;
+    CAN_InitStructure.CAN_ABOM = ENABLE;
+    CAN_InitStructure.CAN_AWUM = DISABLE;
+    CAN_InitStructure.CAN_NART = DISABLE;
+    CAN_InitStructure.CAN_RFLM = DISABLE;
+    CAN_InitStructure.CAN_TXFP = ENABLE;
+    CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
 
-    //Basic CAN init
-    CAN1->MCR = 0x0000;           //stop sleep mode, clear all setting
-    CAN1->MCR |= 1<<0;            //request to enter init mode
-    while((CAN1->MSR & (1 << 0)) == 0)
+    #if (BaudRate_500Kbps)
+    CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
+    CAN_InitStructure.CAN_BS1 = CAN_BS1_9tq;
+    CAN_InitStructure.CAN_BS2 = CAN_BS2_8tq;
+    CAN_InitStructure.CAN_Prescaler = 4;
+    #endif
+
+    if (CAN_Init(CAN1,&CAN_InitStructure) == CANINITFAILED)
     {
-        i++;
-        if(i > 100) return;       //failed to enter init mode
+       //Can Init Failure Handler
     }
-    CAN1->MCR |= (0 << 7);        //Not time-triggered communicaton mode
-    CAN1->MCR |= (0 << 6);        //software auto offline gover
-    CAN1->MCR |= (0 << 5);        //software wakeup sleep mode
-    CAN1->MCR |= (1 << 4);        //stop msg auto transfer
-    CAN1->MCR |= (0 << 3);        //stop msg lock, new msg cover the old
-    CAN1->MCR |= (0 << 2);        //the prior up to the msg ID
-    CAN1->BTR |= 0X00000000;
-    //CAN1->BTR |= (0 << 30);        //Normal Mode
-    CAN1->BTR |= (1 << 30);        //Loop Mode for Debug
+    /* CAN Filter Init */
+    CAN_FilterInitStructure.CAN_FilterNumber = 0;
+    CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
+    CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;
+    CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
+    CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
+    CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0x0000;
+    CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
+    CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_Filter_FIFO0;
+    CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
+    CAN_FilterInit(&CAN_FilterInitStructure);
 
-#if BaudRate_250Kbps
-    CAN1->BTR |= (1 << 24);        //Tsjw=1+1 time-unit
-    CAN1->BTR |= (8 << 20);        //Tbs2=8+1 time-unit
-    CAN1->BTR |= (9 << 20);        //Tbs1=9+1 time-unit
-    CAN1->BTR |= (8 << 0);         //Fdiv=4+1
-    //BuradRate = Fpclk/(8+9+1)/8 = 36000Kbps/18/8 = 250Kbps
-#endif
-
-#if BaudRate_500Kbps
-    CAN1->BTR |= (1 << 24);        //Tsjw=1+1 time-unit
-    CAN1->BTR |= (8 << 20);        //Tbs2=8+1 time-unit
-    CAN1->BTR |= (9 << 20);        //Tbs1=9+1 time-unit
-    CAN1->BTR |= (4 << 0);         //Fdiv=4+1
-    //BuradRate = Fpclk/(8+9+1)/4 = 36000Kbps/18/4 = 500Kbps
-#endif
-
-    CAN1->MCR &= ~(1 << 0);        //request to exit init mode
-    while((CAN1->MSR & (1 << 0)) == 1)
-    {
-        i++;
-        if(i > 0xFFF0) return;     //failed to exit init mode
-    }
-
-    //CAN filter0 init
-    CAN1->FMR |= (1 << 0);         //filter group in init mode
-    CAN1->FA1R &= ~(1 << 0);       //filtr 0 not activated
-    CAN1->FS1R |= (1 << 0);        //filter select 32bit
-    CAN1->FM1R |= (0 << 0);        //filter 0 in flg masked mode
-    CAN1->FFA1R |= (0 << 0);       //filter 0 linked to FIFO 0
-    CAN1->sFilterRegister[0].FR1 = 0x00000000;    //32bit ID
-    CAN1->sFilterRegister[0].FR2 = 0x00000000;    //32bit MASK
-    CAN1->FA1R |= (1 << 0);        //filter 0 activated
-    CAN1->FMR &= (0 << 0);         //filter group in normal mode
-
-#if CAN_RX0_INT_ENABLE             //use INT to receive
-    CAN1->IER |= (1 << 1);         //enable FIFO 0 msg registered INT
-    CAN1_NVIC_init();
-#endif
+    /* Enable CAN Rx Interrupt */
+    CAN_ITConfig(CAN1,CAN_IT_FMP0, ENABLE);
 }
-
-#if 1
-/**
- * @brief rewrite the NVIC_init()
- * */ 
-void CAN1_NVIC_init(void)
-{
-    uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
-    //CanType1->NVIC_IRQChannel = ENABLE;
-
-    /* Compute the Corresponding IRQ Priority --------------------------------*/    
-    tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
-    tmppre = (0x4 - tmppriority);
-    tmpsub = tmpsub >> tmppriority;
-
-    tmppriority = (uint32_t)1 << tmppre;
-    tmppriority |=  0 & tmpsub;
-    tmppriority = tmppriority << 0x04;
-
-    NVIC->IP[USB_LP_CAN1_RX0_IRQn] = tmppriority;
-
-    /* Enable the Selected IRQ Channels --------------------------------------*/
-    NVIC->ISER[USB_LP_CAN1_RX0_IRQn >> 0x05] =
-      (uint32_t)0x01 << (USB_LP_CAN1_RX0_IRQn & (uint8_t)0x1F);
-}
-#endif
 
 /**
  * @brief Send Msg 
@@ -125,7 +76,7 @@ std_err_t can_msg_send(CanTxMsg* tempTxMsg)
     {
         i++;
     }
-    if (i >= 0xfff) 
+    if (i >= 0xfff)
     {
         return ErrNotOk;
     }
@@ -154,7 +105,6 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 {
     //
     CanRxMsg* RxMsg;
-    int8_t i = 0;
     CAN_Receive(CAN1, 0, RxMsg);
 }
 #endif
@@ -182,3 +132,4 @@ void CAN1_SCE_IRQHandler(void)
 {
     //
 }
+/*EOF*/

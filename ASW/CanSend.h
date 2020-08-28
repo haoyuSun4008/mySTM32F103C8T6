@@ -6,3 +6,4 @@ void CanTestMsg_init(void);
 void CanTx_Test(void);
 
 #endif
+/*EOF*/

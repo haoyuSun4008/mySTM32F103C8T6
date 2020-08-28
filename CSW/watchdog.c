@@ -38,7 +38,9 @@ void watchdog_init(void)
  **/ 
 void watchdog_reinit(void)
 {
+	#if (IWDG_ENABLE)
 	IWDG_ReloadCounter();
+	#endif
 }
 
 // window watch dog func
@@ -60,3 +62,4 @@ FlagStatus get_iwdt_sts(void)
 	WWDG_ClearFlag();
 	return WWDG_GetFlagStatus();
 }
+/*EOF*/

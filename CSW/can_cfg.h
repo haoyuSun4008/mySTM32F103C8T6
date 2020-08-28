@@ -8,3 +8,4 @@ void com_sig_mapping(CanTxMsg* tempMsg);
 /*===========CAN Data=========COM sig===========*/
 
 #endif
+/*EOF*/

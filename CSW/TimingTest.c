@@ -2,17 +2,6 @@
 #include "..\MCAL\stm32f10x_gpio.h"
 
 /**
- * @brief init IO for PA0 PA1 PA2 PA3
- * */
-void TimingTest_IO_init(void)
-{
-    //PA0~3 TimingTest Ports
-    GPIOA->CRL = 0x00000001;
-    GPIOA->CRH = 0x00003333;
-    GPIOA->BRR = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3);
-}
-
-/**
  * @brief pull down port
  * */
 void TimingTest_SetLow(uint8_t flg)
@@ -59,3 +48,4 @@ void TimingTest_SetHigh(uint8_t flg)
             break;
     }
 }
+/*EOF*/

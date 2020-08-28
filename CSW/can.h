@@ -18,3 +18,4 @@ std_err_t can_msg_send(CanTxMsg* tempTxMsg);
 std_err_t can_msg_receive(CanRxMsg* tempRxMsg);
 
 #endif
+/*EOF*/

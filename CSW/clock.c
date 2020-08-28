@@ -47,3 +47,4 @@ void SystemClock_init(void)
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
 }
+/*EOF*/
