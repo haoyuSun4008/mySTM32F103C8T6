@@ -1,7 +1,0 @@
-Rebuild target 'Target 1'
-compiling LED.c...
-ASW\LED.h(7): warning:  #1-D: last line of file ends without a newline
-ASW\LED.c(39): warning:  #1-D: last line of file ends without a newline
-compiling CAN.c...
-CAN.c: Error:  #5: cannot open source input file "ASW\CAN.c": No such file or directory".\Output\myPrj.axf" - 1 Errors, 2 Warning(s).
-Target not created
