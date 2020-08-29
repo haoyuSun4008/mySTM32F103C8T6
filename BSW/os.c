@@ -130,11 +130,9 @@ void os_init(void)
     debug = 2;
     
     CAN1_init();
-    CanTestMsg_init();
 	debug = 3;
     
-	//hwio_init();
-    LED_IO_init();  //20200815 check ok
+	hwio_init();
 	debug = 4;
     
 	timer4_init();  //fixme    //fixed
@@ -178,7 +176,7 @@ void os_10ms_proc(void)
 	//Prg Alive Indicator
 	LED_flashing();
     //
-    CanTx_Test();
+    CanTestMsg_Send();
     //
     pid_model_proc();
     //Timing Test Ok 50us
