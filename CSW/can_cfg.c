@@ -64,3 +64,4 @@ void com_sig_mapping(CanTxMsg* tempMsg)
     tempMsg->Data[6] = 0;
     tempMsg->Data[7] = 0;
 }
+/* EOF */

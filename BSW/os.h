@@ -22,3 +22,4 @@ void os(void);
 void os_goto_preshutdown(void);
 
 #endif
+/* EOF */

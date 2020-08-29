@@ -60,3 +60,4 @@ FlagStatus get_iwdt_sts(void)
 	WWDG_ClearFlag();
 	return WWDG_GetFlagStatus();
 }
+/* EOF */

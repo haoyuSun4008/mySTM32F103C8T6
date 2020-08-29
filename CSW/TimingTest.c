@@ -59,3 +59,4 @@ void TimingTest_SetHigh(uint8_t flg)
             break;
     }
 }
+/* EOF */

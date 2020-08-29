@@ -7,3 +7,4 @@ void TimingTest_SetLow(uint8_t flg);
 void TimingTest_SetHigh(uint8_t flg);
 
 #endif
+/* EOF */

@@ -191,3 +191,4 @@ void os_goto_preshutdown(void)
     //
     os_state = OS_PRESHUTDOWN;
 }
+/* EOF */

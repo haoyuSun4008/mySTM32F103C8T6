@@ -10,3 +10,4 @@ FlagStatus get_wwdt_rvu_sts(void);
 FlagStatus get_iwdt_sts(void);
 
 #endif
+/* EOF */
