@@ -7,13 +7,13 @@ CanTxMsg TestMsg;
 /**
  * @brief Call once 10ms
  * */
-void CanTestMsg_init(void)
+void CanTestMsg_Send(void)
 {
     TestMsg.StdId = 0x094;
-    TestMsg.RTR = CAN_RTR_DATA;
-    TestMsg.IDE = CAN_ID_STD ;
+    TestMsg.RTR = CAN_RTR_Data;
+    TestMsg.IDE = CAN_Id_Standard;
     TestMsg.DLC = 8;
-    TestMsg.Data[0] = 0x00;  
+    TestMsg.Data[0] = 0x00;
     TestMsg.Data[1] = 0x01;
     TestMsg.Data[2] = 0x02;
     TestMsg.Data[3] = 0x03;
@@ -21,13 +21,6 @@ void CanTestMsg_init(void)
     TestMsg.Data[5] = 0x05;
     TestMsg.Data[6] = 0x06;
     TestMsg.Data[7] = 0x07;
-}
-
-/**
- * @brief Can Msg Send in Reg
- * */
-void CanTx_Test(void)
-{
-    can_msg_send(&TestMsg);
+    CAN_Transmit(CAN1, &TestMsg);
 }
 /*EOF*/

@@ -4,9 +4,7 @@
 
 #define BaudRate_250Kbps        (0U)
 #define BaudRate_500Kbps        (1U)
-#define CAN_RX0_INT_ENABLE      (1U)
-
-void CAN1_NVIC_init(void);
+#define CAN_RX0_INT_ENABLE      (0U)
 
 /**
  * @brief Test CAN Func
@@ -15,14 +13,16 @@ void CAN1_init(void)
 {
     CAN_InitTypeDef        CAN_InitStructure;
     CAN_FilterInitTypeDef  CAN_FilterInitStructure;
-    NVIC_InitTypeDef       NVIC_InitStructure;
 
     /* Enable CAN1 RX0 interrupt IRQ channel */
+    #if (CAN_RX0_INT_ENABLE)
+    NVIC_InitTypeDef       NVIC_InitStructure;
     NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
+    #endif
 
     /* Set to Default */
     CAN_DeInit(CAN1);

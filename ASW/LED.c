@@ -15,14 +15,12 @@ void LED_flashing(void)
         {
             /* led off */
             GPIO_SetBits(GPIOB, GPIO_Pin_12);
-            //GPIOB->BSRR = GPIO_Pin_12;
             debug_LED_flashing_cnt++;
         }
         else
         {
             /* led on */
             GPIO_ResetBits(GPIOB, GPIO_Pin_12);
-            //GPIOB->BRR = GPIO_Pin_12;
         }
         flg = ~flg;
         t = 0;

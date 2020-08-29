@@ -13,7 +13,6 @@
 #include "..\ASW\CanSend.h"
 #include "..\ASW\PID\pid_model.h"
 
-
 #define OS_TICK (1U)
 
 void os_1ms_proc(void);
@@ -122,7 +121,6 @@ void os_preinit(void)
  **/
 void os_init(void)
 {
-    
 	SystemClock_init();
 	debug = 1;
     
@@ -130,11 +128,9 @@ void os_init(void)
     debug = 2;
     
     CAN1_init();
-    CanTestMsg_init();
 	debug = 3;
     
 	hwio_init();
-    //LED_IO_init();  //20200815 check ok
 	debug = 4;
     
 	timer4_init();  //fixme    //fixed
@@ -179,7 +175,7 @@ void os_10ms_proc(void)
 	//Prg Alive Indicator
 	LED_flashing();
     //
-    CanTx_Test();
+    CanTestMsg_Send();
     //
     pid_model_proc();
     //Timing Test Ok 50us
