@@ -1,6 +1,5 @@
-#include "..\MCAL\stm32f10x_gpio.h"
-#include "interrupt.h"
-#include "can.h"
+#include "..\NVIC\interrupt.h"
+#include ".\can.h"
 
 #define BaudRate_250Kbps        (0U)
 #define BaudRate_500Kbps        (1U)

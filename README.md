@@ -25,3 +25,10 @@ study cm3
 # 提交修改的分支1后切入分支2继续已暂存的修改
 1. git checkout dev2
 2. git stash pop
+
+# 修改工程MCAL和CSW的结构
+1. 外围驱动程序归入MCAL
+
+# 调试TIM1的6路两两互补的PWM
+1. 只打开TIM1_CH1的PWM输出，无PWM波形
+2. 关闭PWM输出，测试6路PWM输出端口的IO时序输出，有波形，硬件线路无问题

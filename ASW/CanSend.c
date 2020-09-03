@@ -1,4 +1,5 @@
-#include "..\CSW\can.h"
+#include "..\CSW\can_cfg.h"
+#include "..\MCAL\CAN\can.h"
 #include "CanSend.h"
 
 //uint16_t can_msg_send_cnt;

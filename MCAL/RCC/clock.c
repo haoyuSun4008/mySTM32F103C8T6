@@ -1,14 +1,12 @@
-#include "..\MCAL\stm32f10x_rcc.h"
-#include "..\MCAL\misc.h"
+#include "..\FWLib\stm32f10x_rcc.h"
+#include "..\FWLib\misc.h"
 #include "clock.h"
 
 /**
   * @brief System Clock Configuration
-  * @retval None
-  */
-void SystemClock_init(void)
+  * */
+void SystemClock_reinit(void)
 {
-    #if 1
     //restore clock config
     RCC_DeInit();
     //disable HSI
@@ -27,7 +25,7 @@ void SystemClock_init(void)
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);
     //debug sysclock
     RCC_MCOConfig(RCC_MCO_SYSCLK);
-
+    
     //enable HSE clock namely the external high speed oscilator
     RCC_HSEConfig(RCC_HSE_ON);
     //wait HSE ready
@@ -37,14 +35,14 @@ void SystemClock_init(void)
     //enable CSS
     //RCC_ClockSecuritySystemCmd(ENABLE);
     //enable PeriphClock
-    #endif
 
     /* GPIO Clock */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+    
     /* Module Clock */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);  
 }
 /*EOF*/

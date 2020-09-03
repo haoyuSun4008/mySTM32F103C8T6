@@ -1,12 +1,13 @@
 /*===include Config Func===*/
-#include "..\CSW\clock.h"
-#include "..\CSW\timer.h"
-#include "..\CSW\hwio.h"
-#include "..\CSW\interrupt.h"
-#include "..\CSW\can.h"
-#include "..\CSW\watchdog.h"
-#include "..\CSW\std_typ.h"
-#include "..\CSW\TimingTest.h"
+#include "..\MCAL\RCC\clock.h"
+#include "..\MCAL\TIMER\timer.h"
+#include "..\MCAL\HWIO\hwio.h"
+#include "..\MCAL\NVIC\interrupt.h"
+#include "..\MCAL\CAN\can.h"
+#include "..\MCAL\WATCHDOG\watchdog.h"
+#include "..\MCAL\std_typ.h"
+#include "..\MCAL\TIMINGPORT\TimingTest.h"
+#include "..\MCAL\PWM\PWM.h"
 #include "os.h"
 /*====include Test Func====*/
 #include "..\ASW\LED.h"
@@ -45,6 +46,11 @@ void os(void)
             case OS_UNINIT:
             {
                 os_state = OS_INIT;
+                break;
+            }
+
+            case OS_INIT:
+            {
                 os_init();
                 os_state = OS_RUN;
                 break;
@@ -66,9 +72,26 @@ void os(void)
             case OS_SHUTDOWN:
             {
                 // os_shutdown();
-                os_state = OS_IDLE;
+                //os_state = OS_IDLE;
                 break;
             }
+
+            case OS_IDLE:
+            {
+                // os_shutdown();
+                //os_state = OS_IDLE;
+                break;
+            }
+
+            case OS_ERROR:
+            {
+                // os_shutdown();
+                //os_state = OS_IDLE;
+                break;
+            }
+
+            default:
+                break;
         }
     }
 }
@@ -121,23 +144,29 @@ void os_preinit(void)
  **/
 void os_init(void)
 {
-	SystemClock_init();
+	SystemClock_reinit();
 	debug = 1;
     
 	Interrupt_init();
     debug = 2;
-    
-    CAN1_init();
-	debug = 3;
-    
-	hwio_init();
-	debug = 4;
-    
-	timer4_init();  //fixme    //fixed
-	debug = 5;
 
     watchdog_init();  //20200815 check ok
+    debug = 3;
+    
+    hwio_init();
+	debug = 4;
+    
+	CAN1_init();
+	debug = 5;
+    
+	TIM4_timer_init();  //fixme    //fixed
+	debug = 6;
+
+    TIM1_PWM_init();
     debug = 6;
+
+    //keep as the last one
+    TIM1_PWM_start();
 }
 
 /**
@@ -145,8 +174,6 @@ void os_init(void)
  **/
 void os_1ms_proc(void)
 {
-	//
-    //watchdog_reinit();
     //for debug
     tick_cnt += OS_TICK;
     if (tick_cnt >= 1000)
@@ -154,6 +181,8 @@ void os_1ms_proc(void)
         os_1000ms_tick += OS_TICK;
         tick_cnt = 0;
     }
+    //TIM1 PWM duty TEST
+    //TIM1_PWM_duty_test();
 }
 
 /**
@@ -163,6 +192,8 @@ void os_5ms_proc(void)
 {
 	//service the dog
     watchdog_reinit();
+    //EHB Pressure Control
+    pid_model_proc();
 }
 
 /**
@@ -172,12 +203,10 @@ void os_10ms_proc(void)
 {
     //
     TimingTest_SetHigh(0);
-	//Prg Alive Indicator
+	//Prg Alive ?
 	LED_flashing();
-    //
+	//Prg Alive ?
     CanTestMsg_Send();
-    //
-    pid_model_proc();
     //Timing Test Ok 50us
     TimingTest_SetLow(0);
 }

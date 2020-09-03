@@ -1,7 +1,7 @@
 #ifndef _WATCHDOG_H_
 #define _WATCHDOG_H_
 
-#include "..\MCAL\stm32f10x.h"
+#include "..\FWLib\stm32f10x.h"
 
 void watchdog_init(void);
 void watchdog_reinit(void);

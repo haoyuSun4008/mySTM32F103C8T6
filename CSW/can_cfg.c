@@ -1,4 +1,4 @@
-#include "std_typ.h"
+#include "..\MCAL\std_typ.h"
 #include "can_cfg.h"
 
 #define CAN_ID_NUM      (6U)

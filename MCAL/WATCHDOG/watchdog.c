@@ -1,5 +1,5 @@
-#include "..\MCAL\stm32f10x_wwdg.h"
-#include "..\MCAL\stm32f10x_iwdg.h"
+#include "..\FWLib\stm32f10x_wwdg.h"
+#include "..\FWLib\stm32f10x_iwdg.h"
 #include "watchdog.h"
 
 #define IWDG_ENABLE (1U)
