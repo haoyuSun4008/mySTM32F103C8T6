@@ -76,48 +76,65 @@ void TIM1_PWM_init(void)
     pwmBDTRTyp.TIM_OSSIState       = TIM_OSSIState_Enable;
     pwmBDTRTyp.TIM_OSSRState       = TIM_OSSRState_Enable;
     TIM_BDTRConfig(TIM1, &pwmBDTRTyp);
+    
+    //config the connection between
+    //TIM1 (Motor Drive Timer) and TIM2 (Hall Detect Timer)
+    TIM_SelectCOM(TIM1, ENABLE);
 
     TIM_ARRPreloadConfig(TIM1, ENABLE);
+    TIM_CCPreloadControl(TIM1, ENABLE);
+
     //allow PWM
     TIM_CtrlPWMOutputs(TIM1, ENABLE);
+
+    //config TIM2 To TIM1 Trigger Source
+    TIM_SelectInputTrigger(TIM1, TIM_TS_ITR1);
+
+    //config COM Event
+    TIM_ITConfig(TIM1, TIM_IT_COM, ENABLE);
+    TIM_ClearFlag(TIM1, TIM_FLAG_COM);
 }
 
 /**
- * @brief only for advanced TIM to ctrl start
+ * @brief Used to control start and stop
+ * @param STATE
+ * @arg START or STOP
+ * @retval Void
  * */
-void TIM1_PWM_start(void)
+void TIM1_PWM_func_ctrl(std_device_state_t STATE)
 {
-    //enable TIM1
-    TIM_Cmd(TIM1, ENABLE);
-}
-
-/**
- * @brief only for advanced TIM to ctrl stop
- * */
-void TIM1_PWM_stop(void)
-{
-    //disable TIM1
-    TIM_Cmd(TIM1, DISABLE);
+    //
+    switch (STATE)
+    {
+        case START:
+            TIM_Cmd(TIM1, ENABLE);
+            break;
+        case STOP:
+            TIM_Cmd(TIM1, DISABLE);
+            break;
+        default:
+            break;
+    }
 }
 
 /**
  * @brief Used to set the pulse width for a PWM channel
- * @param ch    ranges from 1 to 4
- * @param pulse ranges from 0 to 100
+ * @param PORT    ranges from 1 to 4
+ * @param PULSE   ranges from 0 to 100
  * */
-void TIM1_PWM_duty_set(motor_drv_port_t port, uint16_t pulse)
+void TIM1_PWM_duty_set(motor_drv_port_t PORT, uint16_t PULSE)
 {
     //
-    switch (port)
+    switch (PORT)
     {
         case UH:
-            TIM_SetCompare1(TIM1, pulse);
+            TIM_SetCompare1(TIM1, PULSE);
             break;
         case VH:
-            TIM_SetCompare2(TIM1, pulse);
+            TIM_SetCompare2(TIM1, PULSE);
             break;
         case WH:
-            TIM_SetCompare3(TIM1, pulse);
+            TIM_SetCompare3(TIM1, PULSE);
             break;
         default:
             break;
@@ -135,9 +152,11 @@ void TIM1_PWM_duty_test(void)
     static uint16_t PULSE = 10;
 #if (PWM_CH1_Ena)
     TIM1_PWM_duty_set(UH, PULSE);
-#elif (PWM_CH2_Ena)
+#endif
+#if (PWM_CH2_Ena)
     TIM1_PWM_duty_set(VH, PULSE);
-#elif (PWM_CH3_Ena)
+#endif
+#if (PWM_CH3_Ena)
     TIM1_PWM_duty_set(WH, PULSE);
 #endif
 

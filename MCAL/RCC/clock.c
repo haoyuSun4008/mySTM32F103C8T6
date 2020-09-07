@@ -2,11 +2,14 @@
 #include "..\FWLib\misc.h"
 #include "clock.h"
 
+#define RCC_REINIT_ENABLE (0U)
+
 /**
   * @brief System Clock Configuration
   * */
-void SystemClock_reinit(void)
+void SystemClock_reconfig(void)
 {
+#if (RCC_REINIT_ENABLE)
     //restore clock config
     RCC_DeInit();
     //disable HSI
@@ -35,14 +38,25 @@ void SystemClock_reinit(void)
     //enable CSS
     //RCC_ClockSecuritySystemCmd(ENABLE);
     //enable PeriphClock
+#endif
+}
 
-    /* GPIO Clock */
+/**
+ * @brief init MCU Periphs Func Clock
+ * @param None
+ * @retval None
+ * IMPORTANT:
+ * */
+void PeriphsClock_init(void)
+{
+    /* APB2 Periphs Clock Open */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
     
-    /* Module Clock */
+    /* APB1 Periphs Clock Open */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);  
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 }
 /*EOF*/

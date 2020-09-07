@@ -25,9 +25,9 @@ void hwio_init(void)
     /* CAN1 IO Config End */
     
     /* TimingPorts IO Config Start */
-    /* TimingPorts = PA0~3 */
+    /* TimingPorts = P3 */
     GPIO_StructInit(&GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3);
+    GPIO_InitStructure.GPIO_Pin = (/*GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | */GPIO_Pin_3);
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
@@ -40,8 +40,8 @@ void hwio_init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 
     GPIO_Init(GPIOB, &GPIO_InitStructure);
-    //GPIO_SetBits(GPIOB, GPIO_Pin_12);
-    GPIO_ResetBits(GPIOB, GPIO_Pin_12);
+    // 
+    GPIO_SetBits(GPIOB, GPIO_Pin_12);
     /* LED IO Config End */
 
     /* TIM1 PWM IO Config Start */
@@ -57,5 +57,25 @@ void hwio_init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
     /* TIM1 PWM IO Config End */
+
+    /* TIM2 Hall IO Config Start */
+    // PA0~2 mapping to TIM2_CH1~3 for Hall A-B-C
+    GPIO_StructInit(&GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2);
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    /* TIM2 Hall IO Config End */
+
+    /* IR2136 ENA IO Config Start */
+    /* Led2 = PB12*/
+    GPIO_StructInit(&GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    // disable by default
+    GPIO_SetBits(GPIOB, GPIO_Pin_12);
+    /* IR2136 ENA IO Config End */
 }
 /*EOF*/

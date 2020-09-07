@@ -10,9 +10,8 @@ typedef enum
 } motor_drv_port_t;
 
 void TIM1_PWM_init(void);
-void TIM1_PWM_start(void);
-void TIM1_PWM_stop(void);
-void TIM1_PWM_duty_set(motor_drv_port_t port, uint16_t pulse);
+void TIM1_PWM_func_ctrl(std_device_state_t STATE);
+void TIM1_PWM_duty_set(motor_drv_port_t PORT, uint16_t PULSE);
 void TIM1_PWM_duty_test(void);
 
 #endif

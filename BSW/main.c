@@ -3,7 +3,7 @@
 //int __main(void)
 int main(void)
 {
-	os_preinit();
+	os_config();
 
 	os();
 

@@ -6,7 +6,7 @@
 #include "..\MCAL\CAN\can.h"
 #include "..\MCAL\WATCHDOG\watchdog.h"
 #include "..\MCAL\std_typ.h"
-#include "..\MCAL\TIMINGPORT\TimingTest.h"
+#include "..\MCAL\TimingTest.h"
 #include "..\MCAL\PWM\PWM.h"
 #include "os.h"
 /*====include Test Func====*/
@@ -21,6 +21,7 @@ void os_5ms_proc(void);
 void os_10ms_proc(void);
 void os_init(void);
 void os_run(void);
+void info_init(void);
 
 os_state_t os_state = OS_UNINIT;
 
@@ -32,9 +33,42 @@ uint8_t os_1000ms_tick = 0;
 //for debug
 uint8_t debug = 0;
 uint16_t tick_cnt = 0;
+myTestData_t myinfo;
+
+/**
+ * @brief Init BLDC Control Information
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
+ **/
+static void info_init(void)
+{
+    // clear Day_Hour_Min_Sec
+    myinfo.DHMS[0]  = 0;
+    myinfo.DHMS[1]  = 0;
+    myinfo.DHMS[2]  = 0;
+    myinfo.DHMS[3]  = 0;
+
+    // clear Hall Pos
+    myinfo.HallPos = INVAILD_Pos0;
+
+    // clear Driving PWM Duty
+    myinfo.DrvDuty[0] = 0;
+    myinfo.DrvDuty[1] = 0;
+    myinfo.DrvDuty[2] = 0;
+
+    // clear Motor Speed
+    myinfo.MtrSpd      = 0;
+
+    // clear MCU Temperature
+    myinfo.Temperature = 0;
+}
 
 /**
  * @brief os state switches there
+ * @param Void
+ * @retval Void
+ * IMPORTANT: Never Return
  **/
 void os(void)
 {
@@ -98,6 +132,9 @@ void os(void)
 
 /**
  * @brief os schedules.
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_run(void)
 {
@@ -122,6 +159,9 @@ void os_run(void)
 
 /**
  * @brief 1ms tick
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_tick(void)
 {
@@ -131,46 +171,60 @@ void os_tick(void)
 }
 
 /**
- * @brief predefine Test Msg
+ * @brief Reconfig sys clock and config NVIC
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
-void os_preinit(void)
+void os_config(void)
 {
     //
-    pid_model_initilize();
+	SystemClock_reconfig();
+	debug = 1;
+    
+	Interrupt_config();
+    debug = 2;
 }
 
 /**
  * @brief Config MCU Resource
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_init(void)
 {
-	SystemClock_reinit();
-	debug = 1;
-    
-	Interrupt_init();
-    debug = 2;
-
     watchdog_init();  //20200815 check ok
     debug = 3;
+
+    PeriphsClock_init();
+    debug = 4;
     
     hwio_init();
-	debug = 4;
-    
-	CAN1_init();
 	debug = 5;
     
-	TIM4_timer_init();  //fixme    //fixed
+	CAN1_init();
 	debug = 6;
+    
+	TIM4_timer_init();  //fixme    //fixed
+	debug = 7;
 
     TIM1_PWM_init();
-    debug = 6;
+    debug = 8;
 
-    //keep as the last one
+    pid_model_initilize();
+    debug = 9;
+
+    //keep as the last one to call
     TIM1_PWM_start();
+    debug = 10;
 }
 
 /**
  * @brief 1ms assignment write there
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_1ms_proc(void)
 {
@@ -187,6 +241,9 @@ void os_1ms_proc(void)
 
 /**
  * @brief 5ms assignment write there
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_5ms_proc(void)
 {
@@ -198,21 +255,27 @@ void os_5ms_proc(void)
 
 /**
  * @brief 10ms assignment write there
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_10ms_proc(void)
 {
     //
-    TimingTest_SetHigh(0);
+    TimingTest_PA3_Set(1);
 	//Prg Alive ?
 	LED_flashing();
 	//Prg Alive ?
     CanTestMsg_Send();
     //Timing Test Ok 50us
-    TimingTest_SetLow(0);
+    TimingTest_PA3_Set(0);
 }
 
 /**
  * @brief called by ASW
+ * @param Void
+ * @retval Void
+ * IMPORTANT:
  **/
 void os_goto_preshutdown(void)
 {
