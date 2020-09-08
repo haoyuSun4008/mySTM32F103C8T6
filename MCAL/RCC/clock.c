@@ -53,6 +53,7 @@ void PeriphsClock_init(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
     
     /* APB1 Periphs Clock Open */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);

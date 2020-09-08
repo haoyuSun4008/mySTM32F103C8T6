@@ -3,7 +3,6 @@
 
 #define BaudRate_250Kbps        (0U)
 #define BaudRate_500Kbps        (1U)
-#define CAN_RX0_INT_ENABLE      (0U)
 
 /**
  * @brief Test CAN Func
@@ -34,7 +33,8 @@ void CAN1_init(void)
     CAN_InitStructure.CAN_NART = DISABLE;
     CAN_InitStructure.CAN_RFLM = DISABLE;
     CAN_InitStructure.CAN_TXFP = ENABLE;
-    CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
+    //CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
+    CAN_InitStructure.CAN_Mode = CAN_Mode_LoopBack;
 
     #if (BaudRate_500Kbps)
     CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
@@ -60,75 +60,6 @@ void CAN1_init(void)
     CAN_FilterInit(&CAN_FilterInitStructure);
 
     /* Enable CAN Rx Interrupt */
-    CAN_ITConfig(CAN1,CAN_IT_FMP0, ENABLE);
-}
-
-/**
- * @brief Send Msg 
- **/
-std_err_t can_msg_send(CanTxMsg* tempTxMsg)
-{
-    //
-    uint8_t mbox = 0, i = 0;
-    mbox = CAN_Transmit(CAN1, tempTxMsg);
-    while((CAN_TransmitStatus(CAN1, mbox) != CAN_TxStatus_Ok) && (i < 0xfff))
-    {
-        i++;
-    }
-    if (i >= 0xfff)
-    {
-        return ErrNotOk;
-    }
-    else
-    {
-        return ErrOk;
-    }
-}
-
-/**
- * @brief Check and Return Msg 
- **/
-std_err_t can_msg_receive(CanRxMsg* tempRxMsg)
-{
-    //
-    if (CAN_MessagePending(CAN1, CAN_FIFO0) == 0) return ErrNotOk;
-    CAN_Receive(CAN1, CAN_FIFO0, tempRxMsg);
-    return ErrOk;
-}
-
-/**
- * @brief CAN MSG RECEIVE IRQ
- **/
-#if (CAN_RX0_INT_ENABLE)
-void USB_LP_CAN1_RX0_IRQHandler(void)
-{
-    //
-    CanRxMsg* RxMsg;
-    CAN_Receive(CAN1, 0, RxMsg);
-}
-#endif
-
-/**
- * @brief CAN MSG SEND IRQ
- **/
-void USB_HP_CAN1_TX_IRQHandler(void)
-{
-    //
-}
-
-/**
- * @brief CAN MSG SEND IRQ
- **/
-void CAN1_RX1_IRQHandler(void)
-{
-    //
-}
-
-/**
- * @brief CAN MSG SEND IRQ
- **/
-void CAN1_SCE_IRQHandler(void)
-{
-    //
+    //CAN_ITConfig(CAN1,CAN_IT_FMP0, ENABLE);
 }
 /*EOF*/

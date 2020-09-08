@@ -3,9 +3,9 @@
 #include "..\std_err.h"
 #include "..\FWLib\stm32f10x_can.h"
 
+#define CAN_RX0_INT_ENABLE      (0U)
+
 void CAN1_init(void);
-std_err_t can_msg_send(CanTxMsg* tempTxMsg);
-std_err_t can_msg_receive(CanRxMsg* tempRxMsg);
 
 #endif
 /*EOF*/

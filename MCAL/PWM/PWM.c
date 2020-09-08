@@ -30,7 +30,7 @@ void TIM1_PWM_init(void)
     pwmTimeBaseTyp.TIM_Period        = 99;
     pwmTimeBaseTyp.TIM_Prescaler     = 71;
     TIM_TimeBaseInit(TIM1, &pwmTimeBaseTyp);
-
+    
     //common config
     TIM_OCStructInit(&pwmOCTyp);
     pwmOCTyp.TIM_OCMode       = TIM_OCMode_PWM1;

@@ -8,11 +8,13 @@
 #include "..\MCAL\std_typ.h"
 #include "..\MCAL\TimingTest.h"
 #include "..\MCAL\PWM\PWM.h"
-#include "os.h"
+#include "..\MCAL\HALL\hall.h"
+#include "..\MCAL\ADC\adc.h"
 /*====include Test Func====*/
 #include "..\ASW\LED.h"
-#include "..\ASW\CanSend.h"
 #include "..\ASW\PID\pid_model.h"
+/*====include OS Func====*/
+#include "os.h"
 
 #define OS_TICK (1U)
 
@@ -21,48 +23,16 @@ void os_5ms_proc(void);
 void os_10ms_proc(void);
 void os_init(void);
 void os_run(void);
-void info_init(void);
 
 os_state_t os_state = OS_UNINIT;
 
 uint8_t os_wait_tick = 1;
 uint8_t os_5ms_tick = 0;
 uint8_t os_10ms_tick = 0;
-uint8_t os_1000ms_tick = 0;
 
 //for debug
 uint8_t debug = 0;
-uint16_t tick_cnt = 0;
-myTestData_t myinfo;
-
-/**
- * @brief Init BLDC Control Information
- * @param Void
- * @retval Void
- * IMPORTANT:
- **/
-static void info_init(void)
-{
-    // clear Day_Hour_Min_Sec
-    myinfo.DHMS[0]  = 0;
-    myinfo.DHMS[1]  = 0;
-    myinfo.DHMS[2]  = 0;
-    myinfo.DHMS[3]  = 0;
-
-    // clear Hall Pos
-    myinfo.HallPos = INVAILD_Pos0;
-
-    // clear Driving PWM Duty
-    myinfo.DrvDuty[0] = 0;
-    myinfo.DrvDuty[1] = 0;
-    myinfo.DrvDuty[2] = 0;
-
-    // clear Motor Speed
-    myinfo.MtrSpd      = 0;
-
-    // clear MCU Temperature
-    myinfo.Temperature = 0;
-}
+CanTxMsg DebugMsg;
 
 /**
  * @brief os state switches there
@@ -180,10 +150,10 @@ void os_config(void)
 {
     //
 	SystemClock_reconfig();
-	debug = 1;
+    debug += 1;
     
 	Interrupt_config();
-    debug = 2;
+    debug += 1;
 }
 
 /**
@@ -195,29 +165,41 @@ void os_config(void)
 void os_init(void)
 {
     watchdog_init();  //20200815 check ok
-    debug = 3;
+    debug += 1;
 
     PeriphsClock_init();
-    debug = 4;
+    debug += 1;
     
     hwio_init();
-	debug = 5;
+    debug += 1;
     
 	CAN1_init();
-	debug = 6;
+    debug += 1;
     
 	TIM4_timer_init();  //fixme    //fixed
-	debug = 7;
+    debug += 1;
+
+    TIM2_Hall_init();
+    debug += 1;
 
     TIM1_PWM_init();
-    debug = 8;
+    debug += 1;
 
+    ADC1_Temperature_init();
+    debug += 1;
+
+   // keep called there
     pid_model_initilize();
-    debug = 9;
+    debug += 1;
 
     //keep as the last one to call
-    TIM1_PWM_start();
-    debug = 10;
+    TIM1_PWM_func_ctrl(START);
+    debug += 1;
+
+    DebugMsg.StdId = 0x94;
+    DebugMsg.IDE   = CAN_Id_Standard;
+    DebugMsg.RTR   = CAN_RTR_Data;
+    DebugMsg.DLC   = 8;
 }
 
 /**
@@ -229,14 +211,6 @@ void os_init(void)
 void os_1ms_proc(void)
 {
     //for debug
-    tick_cnt += OS_TICK;
-    if (tick_cnt >= 1000)
-    {
-        os_1000ms_tick += OS_TICK;
-        tick_cnt = 0;
-    }
-    //TIM1 PWM duty TEST
-    //TIM1_PWM_duty_test();
 }
 
 /**
@@ -261,18 +235,33 @@ void os_5ms_proc(void)
  **/
 void os_10ms_proc(void)
 {
+    uint16_t temp;
     //
-    TimingTest_PA3_Set(1);
+    TimingTest_PA3_Set(0);
+
 	//Prg Alive ?
 	LED_flashing();
+
 	//Prg Alive ?
-    CanTestMsg_Send();
+    temp = ADC1_Temperature_sample();
+    DebugMsg.Data[0] = (temp >> 8);         // Temperature 8bit H
+    DebugMsg.Data[1] = temp;                // Temperature 8bit L
+
+    DebugMsg.Data[2] = TIM1_CCR1_GET();
+    DebugMsg.Data[3] = TIM1_CCR2_GET();
+    DebugMsg.Data[4] = TIM1_CCR3_GET();
+
+    DebugMsg.Data[5] = 0;
+    DebugMsg.Data[6] = 0;
+    DebugMsg.Data[7] = 0;
+    CAN_Transmit(CAN1, &DebugMsg);
+
     //Timing Test Ok 50us
-    TimingTest_PA3_Set(0);
+    TimingTest_PA3_Set(1);
 }
 
 /**
- * @brief called by ASW
+ * @brief Switch OS into preshutdown state
  * @param Void
  * @retval Void
  * IMPORTANT:

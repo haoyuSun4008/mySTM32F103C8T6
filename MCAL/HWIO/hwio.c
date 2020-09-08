@@ -47,7 +47,7 @@ void hwio_init(void)
     /* TIM1 PWM IO Config Start */
     // PA8~10 for TIM1_CH1~3
     GPIO_StructInit(&GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = (/*GPIO_Pin_8 | */GPIO_Pin_9 | GPIO_Pin_10);
+    GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10);
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);

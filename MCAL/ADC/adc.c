@@ -1,14 +1,14 @@
 #include "..\FWLib\stm32f10x_adc.h"
 #include "adc.h"
 
-#define  TemperatureSensor_Channel      (16U)
+#define  TemperatureSensor_Channel   (ADC_Channel_16)
 
 /**
  * @brief init ADC1 Temperature Sensor within MCU
  * @param void
  * @retval void
  * */
-void ADC1_Temperature_Sample_init(void)
+void ADC1_Temperature_init(void)
 {
     //
     ADC_InitTypeDef tempTyp;
@@ -49,7 +49,7 @@ static uint16_t ADC1_SingleResult_get(uint8_t CH)
 {
     //
     ADC_RegularChannelConfig(ADC1,                        // ADC module
-                            ADC_Channel_16,               // specify the channel linked to TempSensor interally
+                            CH,                           // specify the channel linked to TempSensor interally
                             1,                            // sequence ranked 1
                             ADC_SampleTime_239Cycles5     // specify the sample cycle 239.5
                             );
@@ -83,15 +83,34 @@ static uint16_t ADC1_AverageResult_get(uint8_t CH, uint8_t TIMES)
 /**
  * @brief sample the MCU temperature
  * @param void
- * @retval void
+ * @retval Temperature Multiplys 100
+ * IMPORTANT: 
+ * Resolution = 12bit
+ * Ref        = 3.3V
+ * Tstart     = 4~10us
+ * V25        = 1.4V
+ * Avg_Slop   = 4.478mV/deg
  * */
-int8_t ADC1_Temperature_sample(void)
+uint16_t ADC1_Temperature_sample(void)
 {
     //
-    uint32_t AdcVal;
-    int8_t temp;
+    uint16_t res;
+    double vsensor;
+    double temp;
     
-    AdcVal = ADC1_SingleResult_get(TemperatureSensor_Channel);
+    // read TemperatureSensor_Channel res
+    res = ADC1_SingleResult_get(TemperatureSensor_Channel);
 
-    
+    // ADC res to voltage
+    vsensor = res*3.3/4096;
+
+    // calculate Temperature according to Bias to 25deg Reference
+    temp = (1.4 - vsensor) * 1000000 / 4478 + 25;
+
+    //
+    res = temp*100;
+
+    // return the 100 times the temperature
+    return (res);
 }
+/* EOF */

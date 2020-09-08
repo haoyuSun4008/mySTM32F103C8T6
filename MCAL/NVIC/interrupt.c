@@ -1,4 +1,5 @@
 #include "interrupt.h"
+#include "..\CAN\can.h"
 
 /**
  * @brief all interrupt init there
@@ -49,7 +50,7 @@ void Interrupt_config(void)
 /**
  * @brief Handle with Hall COM Event
  **/
-void TIM1_TRG_COM_IRQn(void)
+void TIM1_TRG_COM_IRQHandler(void)
 {
     if (TIM_GetITStatus(TIM1, TIM_IT_COM) != RESET)
     {
@@ -61,7 +62,7 @@ void TIM1_TRG_COM_IRQn(void)
 /**
  * @brief Handle with TIM2 Hall Edge Trigger Event
  **/
-void TIM2_IRQn(void)
+void TIM2_IRQHandler(void)
 {
     if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET)
     {
@@ -76,7 +77,7 @@ void TIM2_IRQn(void)
     {
         TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
         //ISR Write Below
-        BLDC_Next_Drive_State_Prepare();
+        //BLDC_Next_Drive_State_Prepare();
     }
     else
     {
@@ -97,8 +98,46 @@ void TIM4_IRQHandler(void)
     }
 }
 
+/**
+ * @brief CAN MSG RECEIVE IRQ
+ **/
+#if (CAN_RX0_INT_ENABLE)
+void USB_LP_CAN1_RX0_IRQHandler(void)
+{
+    //
+    CanRxMsg* RxMsg;
+    CAN_Receive(CAN1, 0, RxMsg);
+}
+#endif
+
+/**
+ * @brief CAN MSG SEND IRQ
+ **/
+void USB_HP_CAN1_TX_IRQHandler(void)
+{
+    //
+}
+
+/**
+ * @brief CAN MSG SEND IRQ
+ **/
+void CAN1_RX1_IRQHandler(void)
+{
+    //
+}
+
+/**
+ * @brief CAN MSG SEND IRQ
+ **/
+void CAN1_SCE_IRQHandler(void)
+{
+    //
+}
+
+#if 0
 static inline void BLDC_Next_Drive_State_Prepare(void)
 {
     //
 }
+#endif
 /*EOF*/

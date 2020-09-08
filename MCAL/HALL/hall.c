@@ -3,7 +3,7 @@
 #include "..\FWLib\stm32f10x_gpio.h"
 
 //IMPORTANT: Use Hall Code to Cite
-static const std_HallPos_t BLDC_DRV_PHASES[8][6] = 
+static const std_HallSig_t BLDC_DRV_PHASES[8][6] = 
 {
 //      UH    |    UL    |    VH    |    VL     |    WH    |    WL     |      HallCode   |      MotorPhaseSeq
 //=============================================================================================================
