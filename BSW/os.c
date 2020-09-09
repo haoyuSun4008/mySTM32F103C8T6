@@ -244,8 +244,8 @@ void os_10ms_proc(void)
 
 	//Prg Alive ?
     temp = ADC1_Temperature_sample();
-    DebugMsg.Data[0] = (temp >> 8);         // Temperature 8bit H
-    DebugMsg.Data[1] = temp;                // Temperature 8bit L
+    DebugMsg.Data[0] = (uint8_t)(temp / 100);    // Temperature integer part
+    DebugMsg.Data[1] = (uint8_t)(temp % 100);    // Temperature fraction part
 
     DebugMsg.Data[2] = TIM1_CCR1_GET();
     DebugMsg.Data[3] = TIM1_CCR2_GET();
