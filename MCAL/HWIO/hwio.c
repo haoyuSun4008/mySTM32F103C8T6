@@ -1,10 +1,25 @@
 #include "..\FWLib\stm32f10x_gpio.h"
+#include "..\FWLib\stm32f10x_rcc.h"
 #include "hwio.h"
 
+void hwio_func_init(void);
+void hwio_clock_init(void);
+
 /**
- * @brief config Hardware IO
- **/
+ * @brief init MCU Ports
+ * IMPORTANT:
+ * */
 void hwio_init(void)
+{
+    hwio_clock_init();
+    hwio_func_init();
+}
+
+/**
+ * @brief init MCU Ports Func
+ * IMPORTANT:
+ * */
+void hwio_func_init(void)
 {
     //Creat GPIO_InitStructure
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -12,25 +27,13 @@ void hwio_init(void)
     //Set GPIO_InitStructure to Default
     GPIO_StructInit(&GPIO_InitStructure);
     
-    /* CAN1 IO Config Start */
-    /* CanRx = PA11 */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-    /* CanTx = PA12 */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-    /* CAN1 IO Config End */
-    
     /* TimingPorts IO Config Start */
     /* TimingPorts = P3 */
-    GPIO_StructInit(&GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = (/*GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | */GPIO_Pin_3);
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    //GPIO_StructInit(&GPIO_InitStructure);
+    //GPIO_InitStructure.GPIO_Pin = (/*GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3*/);
+    //GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    //GPIO_Init(GPIOA, &GPIO_InitStructure);
     /* TimingPorts IO Config End */
     
     /* LED IO Config Start */
@@ -43,7 +46,7 @@ void hwio_init(void)
     // 
     GPIO_SetBits(GPIOB, GPIO_Pin_12);
     /* LED IO Config End */
-
+#if 0
     /* TIM1 PWM IO Config Start */
     // PA8~10 for TIM1_CH1~3
     GPIO_StructInit(&GPIO_InitStructure);
@@ -77,5 +80,37 @@ void hwio_init(void)
     // disable by default
     GPIO_SetBits(GPIOB, GPIO_Pin_12);
     /* IR2136 ENA IO Config End */
+#endif
+}
+
+/**
+ * @brief init MCU Ports Clock
+ * IMPORTANT:
+ * */
+void hwio_clock_init(void)
+{
+    /* GPIO Clock Open */
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+}
+
+/**
+ * @brief toggle led state whether prg dead ?
+ * IMPORTANT: no debug
+ * */
+void os_led_toggle(void)
+{
+    static uint8_t flg;
+    if(flg)
+    {
+        /* led off */
+        GPIO_SetBits(GPIOB, GPIO_Pin_12);
+    }
+    else
+    {
+        /* led on */
+        GPIO_ResetBits(GPIOB, GPIO_Pin_12);
+    }
+    flg = ~flg;
 }
 /*EOF*/

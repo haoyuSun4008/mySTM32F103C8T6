@@ -56,7 +56,7 @@ echo --------------------------------------compile C----------------------------
 ::-----------comments:   compile c files
 
 for %%i in (.\output\*.c) do ( echo %%i
-"%keilpath%\C166\bin\C166" %%i MODV2 LARGE MODV2 MAC DEBUG CODE
+"%keilpath%\C166\bin\C166" %%i MODV2 LARGE MODV2 MAC debug CODE
 if !errorlevel! GEQ 2 goto ERROR)
 
 

@@ -1,26 +1,25 @@
-#include "..\MCAL\std_typ.h"
 #include "can_cfg.h"
 
-#define CAN_ID_NUM      (6U)
-
-uint32_t CAN_ID_LIST[CAN_ID_NUM] =
+uint32_t CAN_ID_LIST[_CAN_TOTAL_ID_NUM_] =
 {
-    //for debug
+    // debug
     0x0094,
 
-    //for ASW Test
-    0x0000,
+    // EHB Msg ID
+    0x0095,
+    // VCU Msg ID
+    0x0096,
 
-    //for CCP Type 1
+    // CCP Type 1
     0x07f1,
     0x07f9,
 
-    //for CCP Type 2
+    // CCP Type 2
     0x07f3,
     0x07f5
 };
 
-uint16_t CAN_ID_TIMEOUT_MAX_LIST[CAN_ID_NUM] =
+uint16_t CAN_ID_TIMEOUT_MAX_LIST[_CAN_TOTAL_ID_NUM_] =
 {
     100,
 
@@ -34,34 +33,20 @@ uint16_t CAN_ID_TIMEOUT_MAX_LIST[CAN_ID_NUM] =
 };
 
 /**
- * @brief COM sig to CAN Data
+ * @brief VCU COM Signals Mapping to CAN Data
+ * IMPORTANT:
  * */
-//2020/08/22 write init incomplete
-void can_data_mapping(CanTxMsg* tempMsg)
+void VCU_COM_Signals_Mapping(uint8_t* dat)
 {
-    tempMsg->Data[0] = 0;
-    tempMsg->Data[1] = 0;
-    tempMsg->Data[2] = 0;
-    tempMsg->Data[3] = 0;
-    tempMsg->Data[4] = 0;
-    tempMsg->Data[5] = 0;
-    tempMsg->Data[6] = 0;
-    tempMsg->Data[7] = 0;
+    //
 }
 
 /**
- * @brief this func is used to convert a signals to CAN Data
+ * @brief EHB COM Signals Mapping to CAN Data
+ * IMPORTANT:
  * */
-//2020/08/22 write init incomplete
-void com_sig_mapping(CanTxMsg* tempMsg)
+void EHB_COM_Signals_Mapping(uint8_t* dat)
 {
-    tempMsg->Data[0] = 0;
-    tempMsg->Data[1] = 0;
-    tempMsg->Data[2] = 0;
-    tempMsg->Data[3] = 0;
-    tempMsg->Data[4] = 0;
-    tempMsg->Data[5] = 0;
-    tempMsg->Data[6] = 0;
-    tempMsg->Data[7] = 0;
+    //
 }
 /*EOF*/

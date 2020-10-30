@@ -3,10 +3,11 @@
 //int __main(void)
 int main(void)
 {
-	os_config();
-
-	os();
-
+	while (1)
+	// never return
+	{
+		os();
+	}
 	return 0;
 }
 /*EOF*/

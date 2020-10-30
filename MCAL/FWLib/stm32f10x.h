@@ -174,7 +174,7 @@ typedef enum IRQn
   BusFault_IRQn               = -11,    /*!< 5 Cortex-M3 Bus Fault Interrupt                      */
   UsageFault_IRQn             = -10,    /*!< 6 Cortex-M3 Usage Fault Interrupt                    */
   SVCall_IRQn                 = -5,     /*!< 11 Cortex-M3 SV Call Interrupt                       */
-  DebugMonitor_IRQn           = -4,     /*!< 12 Cortex-M3 Debug Monitor Interrupt                 */
+  DebugMonitor_IRQn           = -4,     /*!< 12 Cortex-M3 debug Monitor Interrupt                 */
   PendSV_IRQn                 = -2,     /*!< 14 Cortex-M3 Pend SV Interrupt                       */
   SysTick_IRQn                = -1,     /*!< 15 Cortex-M3 System Tick Interrupt                   */
 
@@ -784,7 +784,7 @@ typedef struct
 } DAC_TypeDef;
 
 /** 
-  * @brief Debug MCU
+  * @brief debug MCU
   */
 
 typedef struct
@@ -1369,7 +1369,7 @@ typedef struct
 #define FSMC_Bank3_R_BASE     (FSMC_R_BASE + 0x0080) /*!< FSMC Bank3 registers base address */
 #define FSMC_Bank4_R_BASE     (FSMC_R_BASE + 0x00A0) /*!< FSMC Bank4 registers base address */
 
-#define DBGMCU_BASE          ((uint32_t)0xE0042000) /*!< Debug MCU registers base address */
+#define DBGMCU_BASE          ((uint32_t)0xE0042000) /*!< debug MCU registers base address */
 
 /**
   * @}
@@ -3193,7 +3193,7 @@ typedef struct
 #define  SCB_CCR_STKALIGN                    ((uint16_t)0x0200)            /*!< On exception entry, the SP used prior to the exception is adjusted to be 8-byte aligned */
 
 /*******************  Bit definition for SCB_SHPR register ********************/
-#define  SCB_SHPR_PRI_N                      ((uint32_t)0x000000FF)        /*!< Priority of system handler 4,8, and 12. Mem Manage, reserved and Debug Monitor */
+#define  SCB_SHPR_PRI_N                      ((uint32_t)0x000000FF)        /*!< Priority of system handler 4,8, and 12. Mem Manage, reserved and debug Monitor */
 #define  SCB_SHPR_PRI_N1                     ((uint32_t)0x0000FF00)        /*!< Priority of system handler 5,9, and 13. Bus Fault, reserved and reserved */
 #define  SCB_SHPR_PRI_N2                     ((uint32_t)0x00FF0000)        /*!< Priority of system handler 6,10, and 14. Usage Fault, reserved and PendSV */
 #define  SCB_SHPR_PRI_N3                     ((uint32_t)0xFF000000)        /*!< Priority of system handler 7,11, and 15. Reserved, SVCall and SysTick */
@@ -6313,7 +6313,7 @@ typedef struct
 #define  CAN_BTR_TS1                         ((uint32_t)0x000F0000)        /*!< Time Segment 1 */
 #define  CAN_BTR_TS2                         ((uint32_t)0x00700000)        /*!< Time Segment 2 */
 #define  CAN_BTR_SJW                         ((uint32_t)0x03000000)        /*!< Resynchronization Jump Width */
-#define  CAN_BTR_LBKM                        ((uint32_t)0x40000000)        /*!< Loop Back Mode (Debug) */
+#define  CAN_BTR_LBKM                        ((uint32_t)0x40000000)        /*!< Loop Back Mode (debug) */
 #define  CAN_BTR_SILM                        ((uint32_t)0x80000000)        /*!< Silent Mode */
 
 /*!< Mailbox registers */
@@ -7724,7 +7724,7 @@ typedef struct
 
 /******************************************************************************/
 /*                                                                            */
-/*                                 Debug MCU                                  */
+/*                                 debug MCU                                  */
 /*                                                                            */
 /******************************************************************************/
 
@@ -7750,38 +7750,38 @@ typedef struct
 #define  DBGMCU_IDCODE_REV_ID_15             ((uint32_t)0x80000000)        /*!< Bit 15 */
 
 /******************  Bit definition for DBGMCU_CR register  *******************/
-#define  DBGMCU_CR_DBG_SLEEP                 ((uint32_t)0x00000001)        /*!< Debug Sleep Mode */
-#define  DBGMCU_CR_DBG_STOP                  ((uint32_t)0x00000002)        /*!< Debug Stop Mode */
-#define  DBGMCU_CR_DBG_STANDBY               ((uint32_t)0x00000004)        /*!< Debug Standby mode */
+#define  DBGMCU_CR_DBG_SLEEP                 ((uint32_t)0x00000001)        /*!< debug Sleep Mode */
+#define  DBGMCU_CR_DBG_STOP                  ((uint32_t)0x00000002)        /*!< debug Stop Mode */
+#define  DBGMCU_CR_DBG_STANDBY               ((uint32_t)0x00000004)        /*!< debug Standby mode */
 #define  DBGMCU_CR_TRACE_IOEN                ((uint32_t)0x00000020)        /*!< Trace Pin Assignment Control */
 
 #define  DBGMCU_CR_TRACE_MODE                ((uint32_t)0x000000C0)        /*!< TRACE_MODE[1:0] bits (Trace Pin Assignment Control) */
 #define  DBGMCU_CR_TRACE_MODE_0              ((uint32_t)0x00000040)        /*!< Bit 0 */
 #define  DBGMCU_CR_TRACE_MODE_1              ((uint32_t)0x00000080)        /*!< Bit 1 */
 
-#define  DBGMCU_CR_DBG_IWDG_STOP             ((uint32_t)0x00000100)        /*!< Debug Independent Watchdog stopped when Core is halted */
-#define  DBGMCU_CR_DBG_WWDG_STOP             ((uint32_t)0x00000200)        /*!< Debug Window Watchdog stopped when Core is halted */
+#define  DBGMCU_CR_DBG_IWDG_STOP             ((uint32_t)0x00000100)        /*!< debug Independent Watchdog stopped when Core is halted */
+#define  DBGMCU_CR_DBG_WWDG_STOP             ((uint32_t)0x00000200)        /*!< debug Window Watchdog stopped when Core is halted */
 #define  DBGMCU_CR_DBG_TIM1_STOP             ((uint32_t)0x00000400)        /*!< TIM1 counter stopped when core is halted */
 #define  DBGMCU_CR_DBG_TIM2_STOP             ((uint32_t)0x00000800)        /*!< TIM2 counter stopped when core is halted */
 #define  DBGMCU_CR_DBG_TIM3_STOP             ((uint32_t)0x00001000)        /*!< TIM3 counter stopped when core is halted */
 #define  DBGMCU_CR_DBG_TIM4_STOP             ((uint32_t)0x00002000)        /*!< TIM4 counter stopped when core is halted */
-#define  DBGMCU_CR_DBG_CAN1_STOP             ((uint32_t)0x00004000)        /*!< Debug CAN1 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_CAN1_STOP             ((uint32_t)0x00004000)        /*!< debug CAN1 stopped when Core is halted */
 #define  DBGMCU_CR_DBG_I2C1_SMBUS_TIMEOUT    ((uint32_t)0x00008000)        /*!< SMBUS timeout mode stopped when Core is halted */
 #define  DBGMCU_CR_DBG_I2C2_SMBUS_TIMEOUT    ((uint32_t)0x00010000)        /*!< SMBUS timeout mode stopped when Core is halted */
 #define  DBGMCU_CR_DBG_TIM8_STOP             ((uint32_t)0x00020000)        /*!< TIM8 counter stopped when core is halted */
 #define  DBGMCU_CR_DBG_TIM5_STOP             ((uint32_t)0x00040000)        /*!< TIM5 counter stopped when core is halted */
 #define  DBGMCU_CR_DBG_TIM6_STOP             ((uint32_t)0x00080000)        /*!< TIM6 counter stopped when core is halted */
 #define  DBGMCU_CR_DBG_TIM7_STOP             ((uint32_t)0x00100000)        /*!< TIM7 counter stopped when core is halted */
-#define  DBGMCU_CR_DBG_CAN2_STOP             ((uint32_t)0x00200000)        /*!< Debug CAN2 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM15_STOP            ((uint32_t)0x00400000)        /*!< Debug TIM15 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM16_STOP            ((uint32_t)0x00800000)        /*!< Debug TIM16 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM17_STOP            ((uint32_t)0x01000000)        /*!< Debug TIM17 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM12_STOP            ((uint32_t)0x02000000)        /*!< Debug TIM12 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM13_STOP            ((uint32_t)0x04000000)        /*!< Debug TIM13 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM14_STOP            ((uint32_t)0x08000000)        /*!< Debug TIM14 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM9_STOP             ((uint32_t)0x10000000)        /*!< Debug TIM9 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM10_STOP            ((uint32_t)0x20000000)        /*!< Debug TIM10 stopped when Core is halted */
-#define  DBGMCU_CR_DBG_TIM11_STOP            ((uint32_t)0x40000000)        /*!< Debug TIM11 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_CAN2_STOP             ((uint32_t)0x00200000)        /*!< debug CAN2 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM15_STOP            ((uint32_t)0x00400000)        /*!< debug TIM15 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM16_STOP            ((uint32_t)0x00800000)        /*!< debug TIM16 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM17_STOP            ((uint32_t)0x01000000)        /*!< debug TIM17 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM12_STOP            ((uint32_t)0x02000000)        /*!< debug TIM12 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM13_STOP            ((uint32_t)0x04000000)        /*!< debug TIM13 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM14_STOP            ((uint32_t)0x08000000)        /*!< debug TIM14 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM9_STOP             ((uint32_t)0x10000000)        /*!< debug TIM9 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM10_STOP            ((uint32_t)0x20000000)        /*!< debug TIM10 stopped when Core is halted */
+#define  DBGMCU_CR_DBG_TIM11_STOP            ((uint32_t)0x40000000)        /*!< debug TIM11 stopped when Core is halted */
 
 /******************************************************************************/
 /*                                                                            */

@@ -1,4 +1,5 @@
 #include "..\FWLib\stm32f10x_adc.h"
+#include "..\FWLib\stm32f10x_rcc.h"
 #include "adc.h"
 
 #define  TemperatureSensor_Channel   (ADC_Channel_16)
@@ -12,6 +13,8 @@ void ADC1_Temperature_init(void)
 {
     //
     ADC_InitTypeDef tempTyp;
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
     ADC_StructInit(&tempTyp);
     tempTyp.ADC_Mode               = ADC_Mode_Independent;         // 

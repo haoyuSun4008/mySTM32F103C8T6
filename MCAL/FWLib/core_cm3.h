@@ -164,12 +164,12 @@ typedef struct
   __IO uint32_t SHCSR;                        /*!< Offset: 0x24  System Handler Control and State Register             */
   __IO uint32_t CFSR;                         /*!< Offset: 0x28  Configurable Fault Status Register                    */
   __IO uint32_t HFSR;                         /*!< Offset: 0x2C  Hard Fault Status Register                            */
-  __IO uint32_t DFSR;                         /*!< Offset: 0x30  Debug Fault Status Register                           */
+  __IO uint32_t DFSR;                         /*!< Offset: 0x30  debug Fault Status Register                           */
   __IO uint32_t MMFAR;                        /*!< Offset: 0x34  Mem Manage Address Register                           */
   __IO uint32_t BFAR;                         /*!< Offset: 0x38  Bus Fault Address Register                            */
   __IO uint32_t AFSR;                         /*!< Offset: 0x3C  Auxiliary Fault Status Register                       */
   __I  uint32_t PFR[2];                       /*!< Offset: 0x40  Processor Feature Register                            */
-  __I  uint32_t DFR;                          /*!< Offset: 0x48  Debug Feature Register                                */
+  __I  uint32_t DFR;                          /*!< Offset: 0x48  debug Feature Register                                */
   __I  uint32_t ADR;                          /*!< Offset: 0x4C  Auxiliary Feature Register                            */
   __I  uint32_t MMFR[4];                      /*!< Offset: 0x50  Memory Model Feature Register                         */
   __I  uint32_t ISAR[5];                      /*!< Offset: 0x60  ISA Feature Register                                  */
@@ -340,7 +340,7 @@ typedef struct
 #define SCB_HFSR_VECTTBL_Pos                1                                             /*!< SCB HFSR: VECTTBL Position */
 #define SCB_HFSR_VECTTBL_Msk               (1ul << SCB_HFSR_VECTTBL_Pos)                  /*!< SCB HFSR: VECTTBL Mask */
 
-/* SCB Debug Fault Status Register Definitions */
+/* SCB debug Fault Status Register Definitions */
 #define SCB_DFSR_EXTERNAL_Pos               4                                             /*!< SCB DFSR: EXTERNAL Position */
 #define SCB_DFSR_EXTERNAL_Msk              (1ul << SCB_DFSR_EXTERNAL_Pos)                 /*!< SCB DFSR: EXTERNAL Mask */
 
@@ -613,19 +613,19 @@ typedef struct
 #endif
 
 
-/** @addtogroup CMSIS_CM3_CoreDebug CMSIS CM3 Core Debug
-  memory mapped structure for Core Debug Register
+/** @addtogroup CMSIS_CM3_CoreDebug CMSIS CM3 Core debug
+  memory mapped structure for Core debug Register
   @{
  */
 typedef struct
 {
-  __IO uint32_t DHCSR;                        /*!< Offset: 0x00  Debug Halting Control and Status Register    */
-  __O  uint32_t DCRSR;                        /*!< Offset: 0x04  Debug Core Register Selector Register        */
-  __IO uint32_t DCRDR;                        /*!< Offset: 0x08  Debug Core Register Data Register            */
-  __IO uint32_t DEMCR;                        /*!< Offset: 0x0C  Debug Exception and Monitor Control Register */
+  __IO uint32_t DHCSR;                        /*!< Offset: 0x00  debug Halting Control and Status Register    */
+  __O  uint32_t DCRSR;                        /*!< Offset: 0x04  debug Core Register Selector Register        */
+  __IO uint32_t DCRDR;                        /*!< Offset: 0x08  debug Core Register Data Register            */
+  __IO uint32_t DEMCR;                        /*!< Offset: 0x0C  debug Exception and Monitor Control Register */
 } CoreDebug_Type;
 
-/* Debug Halting Control and Status Register */
+/* debug Halting Control and Status Register */
 #define CoreDebug_DHCSR_DBGKEY_Pos         16                                             /*!< CoreDebug DHCSR: DBGKEY Position */
 #define CoreDebug_DHCSR_DBGKEY_Msk         (0xFFFFul << CoreDebug_DHCSR_DBGKEY_Pos)       /*!< CoreDebug DHCSR: DBGKEY Mask */
 
@@ -662,14 +662,14 @@ typedef struct
 #define CoreDebug_DHCSR_C_DEBUGEN_Pos       0                                             /*!< CoreDebug DHCSR: C_DEBUGEN Position */
 #define CoreDebug_DHCSR_C_DEBUGEN_Msk      (1ul << CoreDebug_DHCSR_C_DEBUGEN_Pos)         /*!< CoreDebug DHCSR: C_DEBUGEN Mask */
 
-/* Debug Core Register Selector Register */
+/* debug Core Register Selector Register */
 #define CoreDebug_DCRSR_REGWnR_Pos         16                                             /*!< CoreDebug DCRSR: REGWnR Position */
 #define CoreDebug_DCRSR_REGWnR_Msk         (1ul << CoreDebug_DCRSR_REGWnR_Pos)            /*!< CoreDebug DCRSR: REGWnR Mask */
 
 #define CoreDebug_DCRSR_REGSEL_Pos          0                                             /*!< CoreDebug DCRSR: REGSEL Position */
 #define CoreDebug_DCRSR_REGSEL_Msk         (0x1Ful << CoreDebug_DCRSR_REGSEL_Pos)         /*!< CoreDebug DCRSR: REGSEL Mask */
 
-/* Debug Exception and Monitor Control Register */
+/* debug Exception and Monitor Control Register */
 #define CoreDebug_DEMCR_TRCENA_Pos         24                                             /*!< CoreDebug DEMCR: TRCENA Position */
 #define CoreDebug_DEMCR_TRCENA_Msk         (1ul << CoreDebug_DEMCR_TRCENA_Pos)            /*!< CoreDebug DEMCR: TRCENA Mask */
 
@@ -714,7 +714,7 @@ typedef struct
 /* Memory mapping of Cortex-M3 Hardware */
 #define SCS_BASE            (0xE000E000)                              /*!< System Control Space Base Address */
 #define ITM_BASE            (0xE0000000)                              /*!< ITM Base Address                  */
-#define CoreDebug_BASE      (0xE000EDF0)                              /*!< Core Debug Base Address           */
+#define CoreDebug_BASE      (0xE000EDF0)                              /*!< Core debug Base Address           */
 #define SysTick_BASE        (SCS_BASE +  0x0010)                      /*!< SysTick Base Address              */
 #define NVIC_BASE           (SCS_BASE +  0x0100)                      /*!< NVIC Base Address                 */
 #define SCB_BASE            (SCS_BASE +  0x0D00)                      /*!< System Control Block Base Address */
@@ -724,7 +724,7 @@ typedef struct
 #define SysTick             ((SysTick_Type *)       SysTick_BASE)     /*!< SysTick configuration struct      */
 #define NVIC                ((NVIC_Type *)          NVIC_BASE)        /*!< NVIC configuration struct         */
 #define ITM                 ((ITM_Type *)           ITM_BASE)         /*!< ITM configuration struct          */
-#define CoreDebug           ((CoreDebug_Type *)     CoreDebug_BASE)   /*!< Core Debug configuration struct   */
+#define CoreDebug           ((CoreDebug_Type *)     CoreDebug_BASE)   /*!< Core debug configuration struct   */
 
 #if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1)
   #define MPU_BASE          (SCS_BASE +  0x0D90)                      /*!< Memory Protection Unit            */
@@ -1729,13 +1729,13 @@ static __INLINE void NVIC_SystemReset(void)
 
 
 
-/* ##################################### Debug In/Output function ########################################### */
+/* ##################################### debug In/Output function ########################################### */
 
-/** @addtogroup CMSIS_CM3_CoreDebugInterface CMSIS CM3 Core Debug Interface
-  Core Debug Interface containing:
-  - Core Debug Receive / Transmit Functions
-  - Core Debug Defines
-  - Core Debug Variables
+/** @addtogroup CMSIS_CM3_CoreDebugInterface CMSIS CM3 Core debug Interface
+  Core debug Interface containing:
+  - Core debug Receive / Transmit Functions
+  - Core debug Defines
+  - Core debug Variables
 */
 /*@{*/
 
